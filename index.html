@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/estilo.css" />
+    <title>Registrarse en la aplicación</title>
+  </head>
+
+  <body>
+    <div id="contenedor">
+      <div id="cabezal" class="clearfix">
+        <img
+          id="logo"
+          src="https://p1.develotion.com/2023_03/logo.jpg"
+          alt="logo"
+        />
+        <ul id="navPrincipal">
+          <li id="btnModoInvitado" class="btn inicio">
+            <a>Perfil Invitado</a>
+          </li>
+          <li id="btnModoCensista" class="btn inicio">
+            <a>Perfil Censista</a>
+          </li>
+
+          <li id="btnModoInicio" class="btn">
+            <a>Volver al inicio</a>
+          </li>
+          <!----------------------Fin Modo Inicio --------------------------->
+          <li
+            id="btnSeccionIngresarUsuario"
+            class="btn censistaIniciar secundario"
+          >
+            <a>Ingresar Usuario</a>
+          </li>
+
+          <li
+            id="btnSeccionRegistrarCensista"
+            class="btn censistaIniciar secundario"
+          >
+            <a>Registrar Usuario</a>
+          </li>
+
+          <li
+            id="btnSeccionIngresarDatosPersona"
+            class="btn censistaTerciario secundario"
+          >
+            <a>Ingresar datos de la persona</a>
+          </li>
+
+          <li
+            id="btnSeccionConsultarCenso"
+            class="btn censistaTerciario secundario"
+          >
+            <a>Consultar Pre-Censo</a>
+          </li>
+
+          <li
+            id="btnSeccionReasignarCensista"
+            class="btn censistaTerciario secundario"
+          >
+            <a>Reasignar Censista</a>
+          </li>
+
+          <li
+            id="btnSeccionValidarCenso"
+            class="btn censistaTerciario secundario"
+          >
+            <a>Validar Censo</a>
+          </li>
+
+          <li
+            id="btnSeccionVisualizarEstadistica"
+            class="btn censistaTerciario secundario"
+          >
+            <a>Visualizar estadística</a>
+          </li>
+
+          <!----------------------Fin Modo Censista--------------------------------------------->
+
+          <li id="btnSeccionEliminarDatos" class="btn invitado secundario">
+            <a>Eliminar datos de pre-Censo</a>
+          </li>
+
+          <li id="btnSeccionIngresoInvitado" class="btn invitado secundario">
+            <a>Ingresar Datos</a>
+          </li>
+          <li id="btnSeccionListaCensados" class="btn invitado secundario">
+            <a>Tabla de registro</a>
+          </li>
+
+          <li id="btnSeccionModificarDatos" class="btn invitado secundario">
+            <a>Modificar Datos</a>
+          </li>
+
+          <!--------------Fin Modo Invitado------------------>
+        </ul>
+      </div>
+      <!-- FIN CABEZAL -->
+
+      <div id="contenido">
+        <div class="interior">
+          <div id="seccionRegistrarCensista" class="seccion">
+            <h3>Registrarse en la aplicación</h3>
+
+            <label for="txtNombreCensista">Ingresar Nombre</label><br />
+            <input type="text" id="txtNombreCensista" class="txtRegistroUsuario"/><br />
+
+            <label for="txtApellidoCensista">Ingresar Apellido</label><br />
+            <input type="text" id="txtApellidoCensista" class="txtRegistroUsuario"/><br />
+
+            <label for="txtUsuario">Ingresar Usuario</label><br />
+            <input type="text" id="txtUsuario" class="txtRegistroUsuario"/><br />
+
+            <label for="txtContraseña">Ingresar Contraseña</label><br />
+            <input type="password" id="txtContraseña" class="txtRegistroUsuario"/> <br /><br />
+
+            <input type="button" id="btnRegistrarCensista" value="Registrar" />
+            <p id="pResultadoCensista"></p>
+          </div>
+          <!-- ---------------------Fin función registrarUsuario ---------------------------------- -->
+
+          <div id="seccionIngresarUsuario" class="seccion">
+            <h3>Ingresar usuario registrado</h3>
+            <label for="txtUsuarioRegistrado">Ingrese nombre de usuario:</label
+            ><br />
+            <input type="text" id="txtUsuarioRegistrado" /> <br />
+            <label for="txtContraseñaRegistrada">Ingrese la contraseña:</label
+            ><br />
+            <input type="password" id="txtContraseñaRegistrada" /><br />
+            <br />
+            <input type="button" id="btnLoguear" value="Ingresar Usuario" />
+            <br />
+            <p id="pMensajeDeLogueo"></p>
+            <a id="aRegistrarUsuario" class="link">Registrar usuario</a>
+            <!---------------------Fin funcion ingresoUsuario----------------->
+          </div>
+
+          <div id="seccionIngresarDatosPersona" class="seccion">
+            <h3>Ingresar datos de la persona</h3>
+            <label for="txtNombrePersona">Ingrese el nombre:</label><br />
+            <input type="text" id="txtNombrePersona" class="txtRegistrarPersonaCensista"/><br />
+
+            <label for="txtApellidoPersona">Ingrese el apellido:</label><br />
+            <input type="text" id="txtApellidoPersona" class="txtRegistrarPersonaCensista"/><br />
+
+            <label for="txtEdadPersona">Ingrese la edad:</label><br />
+            <input type="text" id="txtEdadPersona" class="txtRegistrarPersonaCensista" /><br />
+
+            <label for="txtCedulaPersona">Ingrese la cédula:</label><br />
+            <input type="text" id="txtCedulaPersona" class="txtRegistrarPersonaCensista" /><br />
+
+            <label for="slcDepartamentoDatos"
+              >Seleccione el departamento de residencia:</label
+            ><br />
+            <select id="slcDepartamentoDatos" class="slcRegistrarPersonaCensista"></select
+            ><br />
+
+            <label for="slcOcupacionDatos">Seleccione la ocupación:</label
+            ><br />
+            <select id="slcOcupacionDatos" class="slcRegistrarPersonaCensista"></select>
+            <br />
+            <br />
+            <input
+              type="button"
+              id="btnEnviarDatosPersonas"
+              value="Enviar datos"
+            /><br />
+            <p id="pMensajeDatosPersonas"></p>
+          </div>
+          <!----------------------Fin funcion datosPersonas----->
+
+          <div id="seccionValidarCenso" class="seccion">
+            <h3>Validar censo de una persona</h3>
+
+            <label for="txtCedulaValidar"
+              >Ingrese la cedula de la persona a validar:
+            </label>
+
+            <select id="txtCedulaValidar"></select>
+
+            <input type="button" value="Validar" id="btnValidarPersona" />
+            <br />
+
+            <p id="pMensajeValidarPersona"></p>
+          </div>
+
+          <!--                     Fin Seccion Validar Persona -->
+
+          <div id="seccionConsultarCenso" class="seccion">
+            <h3>Consultar censo pre completado</h3>
+            <label for="txtCedula">Ingrese la cédula</label>
+            <input type="text" id="txtCedula" /><br />
+            <input type="button" id="btnVerificar" value="Verificar" />
+            <p id="pMensajePreCenso"></p>
+          </div>
+
+          <!-- Fin Seccion Consultar Censo Pre Completado -->
+
+          <div id="seccionReasignarCensista" class="seccion">
+            <h3>Reasignar para validar</h3>
+
+            <label for="cedula"
+              >Indique la cedula de la persona que desea reasignar:
+            </label>
+            <select id="pendientesValidar">
+            </select>
+
+            <label for="cencistas"
+              >Seleccione a que cencista se lo desea reasignar:
+            </label>
+            <select id="cencistas">
+              <option value="nombres">Seleccionar</option>
+            </select>
+
+            <input type="button" value="Reasignar" id="reasignar" />
+            <p id="pMensajeReagsinar"></p>
+          </div>
+
+          <!--      Fin seccion Reasignar para Validar -->
+
+          <div id="seccionVisualizarEstadistica" class="seccion">
+            <h3>Visualizar información estadística</h3>
+            <p id="pMensajeTotalCensados"></p>
+            <p id="pMensajePendientesValidar"></p>
+            <br />
+            <label for="slcDepartamentoDatosCensista"
+              >Seleccione un departamento para ver la cantidad de censados:
+            </label>
+            <select id="slcDepartamentoDatosCensista"></select
+            ><br />
+
+            <input
+              type="button"
+              id="btnMostrarCantidadCensados"
+              value="Mostrar Cantidad Censados"
+            />
+            <p id="pMostrarSlcCensados"></p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Departamento</th>
+                  <th>Total Censados</th>
+                </tr>
+              </thead>
+              <tbody id="tblMostrarDepartamento"></tbody>
+            </table>
+          </div>
+
+          <!-- Fin seccion visualizar informacion estadistica -->
+
+          <div id="seccionEliminarDatos" class="seccion">
+            <h3>Eliminar sus datos para el censo</h3>
+            <label for="cedula">Ingrese su cedula: </label>
+            <input type="text" id="cedulaAEliminar" />
+
+            <input type="button" value="Eliminar" id="eliminarPersona" />
+
+            <p id="pMensajeEliminarDatos"></p>
+          </div>
+
+          <!-- Fin seccion eliminar datos para el censo -->
+          <div id="seccionIngresoInvitado" class="seccion">
+            <h3>Ingresar datos para el censo</h3>
+            <label for="txtNombreInvitadoIngresar">Ingrese el nombre:</label
+            ><br />
+            <input type="text" id="txtNombreInvitadoIngresar" class="txtRegistroInvitado"/><br />
+
+            <label for="txtApellidoInvitadoIngresar">Ingrese el apellido:</label
+            ><br />
+            <input type="text" id="txtApellidoInvitadoIngresar" class="txtRegistroInvitado"/><br />
+
+            <label for="txtEdadInvitadoIngresar">Ingrese la edad:</label><br />
+            <input type="text" id="txtEdadInvitadoIngresar" class="txtRegistroInvitado"/><br />
+
+            <label for="txtCedulaInvitadoIngresar">Ingrese la cédula:</label
+            ><br />
+            <input type="text" id="txtCedulaInvitadoIngresar" class="txtRegistroInvitado"/><br />
+
+            <label for="slcDepartamentoInvitadoIngresar"
+              >Seleccione el departamento de residencia:</label
+            ><br />
+            <select id="slcDepartamentoInvitadoIngresar" class="slcRegistroInvitado"></select
+            ><br />
+
+            <label for="slcOcupacionInvitado">Seleccione la ocupación:</label>
+            <br /><select id="slcOcupacionInvitado" class="slcRegistroInvitado"></select>
+            <br /><br />
+            <input
+              type="button"
+              id="btnIngresarDatosInvitado"
+              value="Enviar datos"
+            /><br />
+            <p id="pMensajeIngresarInvitado"></p>
+          </div>
+          <!----------------------Fin funcion datosInvitado----->
+          <div id="seccionModificarDatos" class="seccion">
+            <div>
+              <label for="txtCedulaInvitado">Ingrese la cédula:</label><br />
+              <input type="text" id="txtCedulaInvitado" /><br />
+              <input
+                type="button"
+                id="btnEnviarDatosInvitado"
+                value="Enviar datos"
+              /><br />
+              <p id="pMensajeDatosInvitado"></p>
+            </div>
+            <div id="datosModificados" style="display: none;">
+              <label for="nombreModificado">Nombre:</label> <br />
+              <input type="text" id="nombreModificado" /> <br />
+              <label for="apellidoModificado">Apellido:</label><br />
+              <input type="text" id="apellidoModificado" /> <br />
+              <label for="edadModificado">Edad:</label><br />
+              <input type="text" id="edadModificado" /> <br />
+              <label for="departamentosModificado">Departamento:</label><br>
+              <select id="departamentosModificado"></select> <br>
+              <label for="ocupacionModificado">Ocupacion </label><br />
+              <select id="ocupacionModificado"></select>
+              <br />
+              <input type="button" id="modificarDatosInvitado" value="Modificar Datos"/>
+            </div>
+          </div>
+
+          <div id="seccionListaCensados" class="seccion">
+            <h3>Lista de censados</h3>
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>Departamento</th>
+                  <th>Estudian</th>
+                  <th>No trabajan</th>
+                  <th>Dependientes o independientes</th>
+                  <th>Porcentaje del total de censados</th>
+                </tr>
+              </thead>
+
+              <tbody id="tblListaCensados"></tbody>
+            </table>
+          </div>
+        </div>
+        <!--FIN ELEMENTOS-->
+      </div>
+      <!-- FIN CONTENIDO -->
+      <div id="pie">
+        <a href="https://www.ort.edu.uy">Footer</a>
+      </div>
+      <!-- FIN PIE -->
+    </div>
+    <!-- FIN CONTENEDOR -->
+
+    <p id="ResultadoLoginCensita"></p>
+
+    <script src="js/0-biblioteca.js"></script>
+    <script src="js/1-objCensista.js"></script>
+    <script src="js/1-objPersona.js"></script>
+    <script src="js/1-objDepartamentoYOcupacion.js"></script>
+    <script src="js/2-registrarUsuario.js"></script>
+    <script src="js/3-ingresarUsuario.js"></script>
+    <script src="js/4-datosPersonas.js"></script>
+    <script src="js/4.1-datosPersonasInvitado.js"></script>
+    <script src="js/5-consultarCensosPreCompletados.js"></script>
+    <script src="js/5.1-validarCensoDeUnaPersona.js"></script>
+    <script src="js/6-reasignarParaValidar.js"></script>
+    <script src="js/7-censoInvitado.js"></script>
+    <script src="js/8-eliminarDatosCenso.js"></script>
+    <script src="js/9-listasCensados.js"></script>
+    <script src="js/10-secciones.js"></script>
+    <script src="js/11-informacionCensista.js"></script>
+  </body>
+</html>
