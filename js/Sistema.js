@@ -1,9 +1,9 @@
 import { Censista, juegoDePruebaCensistas } from "./Censista";
-import { Departamento, departamentos } from "./Departamento";
-import { Ocupacion, ocupaciones } from "./Ocupacion";
+import { Departamento, departamentos, obtenerDepartamentoPorValor } from "./Departamento";
+import { Ocupacion, ocupaciones, retornarOcupacionPorTipo } from "./Ocupacion";
 import { Persona, juegoPruebasPersonas } from "./Persona";
 
-class Sistema {
+export class Sistema {
   constructor() {
     this.censistas = [];
     this.departamentos = [];
@@ -15,7 +15,7 @@ class Sistema {
   agregarArraysAlInicio() {
     this.agregarArray(this.censistas, juegoDePruebaCensistas);
     this.agregarArray(this.departamentos, departamentos);
-    this.agregarArray();
+    this.agregarArray(this.personas, juegoPruebasPersonas);
   }
   //Agrega datos a un array del sistema
   agregarArray(array, datosArray) {
@@ -54,13 +54,30 @@ class Sistema {
 
     return login;
   }
-  asignarACensista(cedula) {
+  asignarACensista(persona) {
     //metodo que asigna una persona a un censista aleatorio
     let maximo = this.censistas.length; //define un maximo que es el maximo de censistas
 
     let numero = Math.floor(Math.random() * maximo); //define un numero que se redondea hacia abajo
     //el numero es un numero aleatorio entre 0 y 1 multiplicado por el maximo
-    this.censistas[numero].personasACargo.push(cedula); //hace un push al arreglo de censista.personasACargo de la cedula de la persona asignada
+    this.censistas[numero].personasACargo.push(persona); //hace un push al arreglo de censista.personasACargo de la cedula de la persona asignada
+  }
+  agregarPersona(nombre, apellido, edad, cedula,valorDepartamento, valorOcupacion, validado){
+    let departamento = obtenerDepartamentoPorValor(valorDepartamento);
+    let ocupacion = retornarOcupacionPorTipo(valorOcupacion);
+    let nuevaPersona =new Persona(nombre,apellido,edad,cedula,departamento,ocupacion, validado);
+    if(this.existePersona(nuevaPersona.cedula)) throw new Error("error, la cédula ya se encuentra registrada en el sistema");
+    else {
+        this.agregarArray(this.personas, nuevaPersona)
+        if(!validado) this.asignarACensista(nuevaPersona);
+    };
+  }
+
+  existePersona(cedulaPersona) {
+    this.personas.forEach(persona => {
+        if(persona.cedula === cedulaPersona) return true
+    });
+    return false;
   }
 
   mostrarCensistaAsignado(cedula) {
@@ -120,4 +137,4 @@ class Sistema {
   }
 }
 
-let sistema = new Sistema(); // le damos la funcionalidad al sistema
+export let sistema = new Sistema(); // le damos la funcionalidad al sistema

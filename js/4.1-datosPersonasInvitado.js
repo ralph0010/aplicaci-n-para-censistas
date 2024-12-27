@@ -1,3 +1,6 @@
+import { sistema } from "./sistema";
+
+
 document.querySelector("#btnIngresarDatosInvitado").addEventListener("click", ingresarPersonaInvitado);
 
 
@@ -5,16 +8,31 @@ document.querySelector("#btnIngresarDatosInvitado").addEventListener("click", in
 agregarDepartamentos("slcDepartamentoInvitadoIngresar"); //Funcion en la biblioteca
 agregarOcupacion("slcOcupacionInvitado"); //Funcion en la biblioteca
 
-function ingresarPersonaInvitado(){
-    let nombre = document.querySelector("#txtNombreInvitadoIngresar").value;
-    let apellido = document.querySelector("#txtApellidoInvitadoIngresar").value;
-    let edad = Number(document.querySelector("#txtEdadInvitadoIngresar").value);
-    let cedula = document.querySelector("#txtCedulaInvitadoIngresar").value;
-    let departamento = document.querySelector("#slcDepartamentoInvitadoIngresar").value;
-    let ocupacion = document.querySelector("#slcOcupacionInvitado").value;
+//retorna un string con un mensaje
+function mensajeAgregado(nombre, apellido){
+    return `Se ha agregado correctamente a ${nombre} ${apellido} al sistema`; 
+}
 
-    cedula = reEscribirCedula(cedula);
-    let cedulaNumber = Number(cedula); // Lo usaremos para comparar la clase persona
+function ingresarPersonaInvitado(){
+
+    try{
+        let nombre = document.querySelector("#txtNombreInvitadoIngresar").value;
+        let apellido = document.querySelector("#txtApellidoInvitadoIngresar").value;
+        let edad = Number(document.querySelector("#txtEdadInvitadoIngresar").value);
+        let cedula = document.querySelector("#txtCedulaInvitadoIngresar").value;
+        let departamento = document.querySelector("#slcDepartamentoInvitadoIngresar").value;
+        let ocupacion = document.querySelector("#slcOcupacionInvitado").value;
+
+        sistema.agregarPersona(nombre,apellido,edad,cedula, departamento, ocupacion, false);
+        
+    }catch (error){
+
+    }
+
+    // cedula = reEscribirCedula(cedula);
+    // let cedulaNumber = Number(cedula); // Lo usaremos para comparar la clase persona
+
+    
 
     let mensaje;
     

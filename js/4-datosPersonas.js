@@ -51,19 +51,7 @@ function ingresarPersona(){
 
 
 
-function cumpleEdad(edad){ //verifica si la edad es un valor valido
-    let cumple = false;
-    if (!isNaN(edad) && edad >= 0 && edad <= 130){
-        cumple = true;
-    }
 
-    if(edad===""){
-
-        cumple=false
-    }
-    
-    return cumple;
-}
 
 
 

@@ -1,15 +1,15 @@
-
-
-document.querySelector("#seccionModificarDatos").addEventListener("click", ocultarSeccionSecundaria)
+import { Biblioteca } from "./biblioteca";
+let biblioteca = new Biblioteca();
+document.querySelector("#btnSeccionIngresoInvitado").addEventListener("click", ocultarSeccionSecundaria)
 function ocultarSeccionSecundaria(){
      // ocultarSeccionDeterminada("datosModificados")
-      cambiarSeccion("seccionModificarDatos")
+      cambiarSeccion("btnSeccionIngresoInvitado")
+      biblioteca.agregarDepartamentos("departamentosModificado");
 }
 
 let cedulaAModificar;
 
-agregarDepartamentos("departamentosModificado");
-agregarOcupacion("ocupacionModificado");
+// biblioteca.agregarOcupacion("ocupacionModificado");
 
 document.querySelector("#btnEnviarDatosInvitado").addEventListener("click", censoInvitado)
 

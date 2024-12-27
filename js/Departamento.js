@@ -1,14 +1,29 @@
+const valorMinimoDepartamento = 1;
+const valorMaximoDepartamento =19;
 export class Departamento {
   constructor(nombre, valor)
    {
     this.nombre = nombre;
     this.valor = valor;
   }
+  
   obtenerDepartamento(nombreDepartamento){
     for (const departamento of departamentos) {
       if(departamento.nombre.toLowerCase()== nombreDepartamento.toLowerCase()) return departamento;
     }
     return null;
+  }
+}
+export function obtenerDepartamentoPorValor(valorDepartamento){
+  validarDepartamento(valorDepartamento);
+  departamentos.forEach(departArray => {
+    if(departArray.valor === valorDepartamento) return departamento;
+  });
+  throw new Error ("Error, no se encontró el departamento"); 
+}
+function validarDepartamento(departamento){
+  if(departamento.valor <valorMinimoDepartamento || departamento.valor > valorMaximoDepartamento){
+    throw new Error("Error, el departamento seleccionado no es correcto");
   }
 }
 export const departamentos = [new Departamento("Artigas", 1),
