@@ -1,12 +1,12 @@
-import { sistema } from "./sistema";
-
+import { sistema } from "./sistema.js";
+import {biblioteca} from "./biblioteca.js"
 
 document.querySelector("#btnIngresarDatosInvitado").addEventListener("click", ingresarPersonaInvitado);
 
 
 
-agregarDepartamentos("slcDepartamentoInvitadoIngresar"); //Funcion en la biblioteca
-agregarOcupacion("slcOcupacionInvitado"); //Funcion en la biblioteca
+biblioteca.agregarDepartamentos("slcDepartamentoInvitadoIngresar"); //Funcion en la biblioteca
+biblioteca.agregarOcupacion("slcOcupacionInvitado"); //Funcion en la biblioteca
 
 //retorna un string con un mensaje
 function mensajeAgregado(nombre, apellido){

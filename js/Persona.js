@@ -1,5 +1,5 @@
-import { departamento, departamentos } from "./Departamento";
-import { Biblioteca,biblioteca } from Biblioteca;
+import { Departamento, departamentos } from "./Departamento.js";
+import { biblioteca } from "./biblioteca.js";
 export class Persona {
   constructor(
     nombre,
@@ -17,7 +17,14 @@ export class Persona {
     this.departamento = departamento;
     this.ocupacion = ocupacion;
     this.validado = validado;
-    this.validarPersonas(nombre,apellido,edad,departamento,ocupacion,cedula);
+    this.validarPersonas(
+      nombre,
+      apellido,
+      edad,
+      departamento,
+      ocupacion,
+      cedula
+    );
   }
   validarPersonas(nombre, apellido, edad, departamento, ocupacion, cedula) {
     if (!biblioteca.stringValidator(nombre))
@@ -28,12 +35,11 @@ export class Persona {
       throw new Error(
         "Error, nombre inválido, revise que los carácteres sean correctos"
       );
-    else if (!this.cumpleEdad)
+    else if (!this.#cumpleEdad(edad))
       throw new Error(
         "Error, la edad ingresada es incorrecta, ingrese un número del 0 hasta 130"
       );
-    this.#validarCedula(cedula)
-
+    this.#validarCedula(cedula);
   }
 
   //verifica si la edad es un valor valido
@@ -43,41 +49,40 @@ export class Persona {
     }
     return false;
   }
-  
-  
 
   #validarCedula(cedula) {
     this.#validarCantidadDigitosCedulas(cedula);
-    if(!this.#cedulaEsValida(cedula)) throw new Error("La cédula ingresada no es válidad");
-    }
-  #cedulaEsValida(cedula){
-    let replicarCedula = cedula; // Asignamos a una variable la cedula para poder modificarla después.
+    if (!this.#cedulaEsValida(cedula))
+      throw new Error("La cédula ingresada no es válidad");
+  }
+  #cedulaEsValida(cedula) {
+    let replicarCedula = ""+cedula; // Asignamos a una variable la cedula para poder modificarla después.
     let multiplicador = "2987634"; // Variable que utilizaremos para comprobar si la cédula es válida
     let resultado = 0; //Variable que sumaremos más adelante en la repetitiva
-    let digitoVerificador = cedula.charAt(cedula.length - 1); //El valor del ultimo digito de la cédula
-  
+    let digitoVerificador = replicarCedula.charAt(replicarCedula.length - 1); //El valor del ultimo digito de la cédula
+
     //console.log(digitoVerificador)
     if (cedula.length === 7) {
       replicarCedula = "0" + cedula; //Si la cedula contiene 7 caracteres le sumamos un 0 a la variable
     }
-  
+
     for (let i = 0; i < multiplicador; i++) {
       //Recorremos las posiciones del multiplicador
       resultado +=
         Number(multiplicador.charAt(i)) * Number(replicarCedula.charAt(i)); //La posición que recibimos como text, lo modificamos a Number
     }
-  
+
     if (((resultado % 10) + Number(digitoVerificador)) % 10 === 0) {
       // obtenemos el valor del resto y le sumamos al numero verificador, luego obtenemos el resto de dividido 10. Si el valor final es igual a 0 cumple la funcion;
       return true;
     }
     //console.log(resultado % 10 + Number(digitoVerificador))
-  
+
     return false; //Retornamos si cumple o no cumple el parametro llegado como cédula
-  
   }
-  #validarCantidadDigitosCedulas(cedula){
-    if(cedula.length <7 || cedula.length >8) throw new Error("Error, la cédula debe contener entre 7 y 8 dígitos");
+  #validarCantidadDigitosCedulas(cedula) {
+    if (cedula.length < 7 || cedula.length > 8)
+      throw new Error("Error, la cédula debe contener entre 7 y 8 dígitos");
   }
 
   #reEscribirCedula(cedula) {
@@ -94,206 +99,206 @@ export class Persona {
   }
 }
 
-export const juegoPruebasPersonas = [
-  new Persona(
-    "Nicolás",
-    "Martinez",
-    46,
-    12345754,
-    "Durazno",
-    "Dependiente",
-    true
-  ),
-  new Persona("Ana", "González", 27, 23456789, "Canelones", "Estudiante", true),
-  new Persona(
-    "Luis",
-    "Rodríguez",
-    55,
-    34567890,
-    "Maldonado",
-    "Independiente",
-    true
-  ),
-  new Persona("María", "García", 67, 45678901, "Salto", "No Trabaja", true),
-  new Persona(
-    "Pablo",
-    "Martínez",
-    34,
-    56789012,
-    "Paysandú",
-    "Dependiente",
-    true
-  ),
-  new Persona(
-    "Carmen",
-    "Fernández",
-    48,
-    67890123,
-    "Rivera",
-    "Independiente",
-    true
-  ),
-  new Persona("Diego", "López", 31, 78901234, "Tacuarembó", "Estudiante", true),
-  new Persona(
-    "Teresa",
-    "Sánchez",
-    25,
-    89012345,
-    "Cerro Largo",
-    "Dependiente",
-    true
-  ),
-  new Persona("Sergio", "Silva", 52, 90123456, "Rocha", "Independiente", true),
-  new Persona(
-    "Beatriz",
-    "Ramírez",
-    44,
-    23456712,
-    "Treinta y Tres",
-    "No Trabaja",
-    true
-  ),
-  new Persona(
-    "Rodrigo",
-    "Mendoza",
-    30,
-    34567123,
-    "Durazno",
-    "Independiente",
-    true
-  ),
-  new Persona(
-    "Laura",
-    "Gutierrez",
-    29,
-    45671234,
-    "Artigas",
-    "Estudiante",
-    true
-  ),
-  new Persona(
-    "Pedro",
-    "Torres",
-    60,
-    56712345,
-    "San José",
-    "Independiente",
-    true
-  ),
-  new Persona(
-    "Gabriela",
-    "Peralta",
-    21,
-    67123456,
-    "Colonia",
-    "No Trabaja",
-    true
-  ),
-  new Persona(
-    "Ernesto",
-    "Vargas",
-    73,
-    71234567,
-    "Soriano",
-    "Dependiente",
-    true
-  ),
-  new Persona(
-    "Inés",
-    "Aguilar",
-    45,
-    81234568,
-    "Río Negro",
-    "Independiente",
-    false
-  ),
-  new Persona(
-    "Julián",
-    "Cordero",
-    33,
-    91234569,
-    "Lavalleja",
-    "Estudiante",
-    false
-  ),
-  new Persona(
-    "Sofía",
-    "Castillo",
-    64,
-    12345691,
-    "Florida",
-    "No Trabaja",
-    false
-  ),
-  new Persona("Manuel", "Pinto", 50, 23456912, "Flores", "Dependiente", false),
-  new Persona("Lucía", "Peña", 37, 34569123, "Rocha", "Estudiante", false),
-  new Persona(
-    "Guillermo",
-    "Navarro",
-    28,
-    45691234,
-    "Treinta y Tres",
-    "Dependiente",
-    false
-  ),
-  new Persona(
-    "Rosa",
-    "Lugo",
-    22,
-    56912345,
-    "Canelones",
-    "Independiente",
-    false
-  ),
-  new Persona("Rafael", "Ríos", 40, 69123456, "Maldonado", "No Trabaja", false),
-  new Persona(
-    "Estela",
-    "Palma",
-    71,
-    91234567,
-    "Montevideo",
-    "Estudiante",
-    false
-  ),
-  new Persona(
-    "Nicolás",
-    "Vallejo",
-    46,
-    12345781,
-    "Durazno",
-    "Dependiente",
-    false
-  ),
-  new Persona(
-    "Mariana",
-    "Quintero",
-    35,
-    23457812,
-    "Tacuarembó",
-    "Independiente",
-    false
-  ),
-  new Persona(
-    "Armando",
-    "Zúñiga",
-    64,
-    34578123,
-    "Paysandú",
-    "No Trabaja",
-    false
-  ),
-  new Persona("Isabel", "Vega", 23, 45781234, "Rivera", "Estudiante", false),
-  new Persona("Carlos", "Yáñez", 39, 57812345, "Salto", "Dependiente", false),
-  new Persona(
-    "Graciela",
-    "Ximénez",
-    28,
-    78123456,
-    "Artigas",
-    "Independiente",
-    false
-  ),
-];
+// export const juegoPruebasPersonas = [
+//   new Persona(
+//     "Nicolás",
+//     "Martinez",
+//     46,
+//     12345754,
+//     "Durazno",
+//     "Dependiente",
+//     true
+//   ),
+//   new Persona("Ana", "González", 27, 23456789, "Canelones", "Estudiante", true),
+//   new Persona(
+//     "Luis",
+//     "Rodríguez",
+//     55,
+//     34567890,
+//     "Maldonado",
+//     "Independiente",
+//     true
+//   ),
+//   new Persona("María", "García", 67, 45678901, "Salto", "No Trabaja", true),
+//   new Persona(
+//     "Pablo",
+//     "Martínez",
+//     34,
+//     56789012,
+//     "Paysandú",
+//     "Dependiente",
+//     true
+//   ),
+//   new Persona(
+//     "Carmen",
+//     "Fernández",
+//     48,
+//     67890123,
+//     "Rivera",
+//     "Independiente",
+//     true
+//   ),
+//   new Persona("Diego", "López", 31, 78901234, "Tacuarembó", "Estudiante", true),
+//   new Persona(
+//     "Teresa",
+//     "Sánchez",
+//     25,
+//     89012345,
+//     "Cerro Largo",
+//     "Dependiente",
+//     true
+//   ),
+//   new Persona("Sergio", "Silva", 52, 90123456, "Rocha", "Independiente", true),
+//   new Persona(
+//     "Beatriz",
+//     "Ramírez",
+//     44,
+//     23456712,
+//     "Treinta y Tres",
+//     "No Trabaja",
+//     true
+//   ),
+//   new Persona(
+//     "Rodrigo",
+//     "Mendoza",
+//     30,
+//     34567123,
+//     "Durazno",
+//     "Independiente",
+//     true
+//   ),
+//   new Persona(
+//     "Laura",
+//     "Gutierrez",
+//     29,
+//     45671234,
+//     "Artigas",
+//     "Estudiante",
+//     true
+//   ),
+//   new Persona(
+//     "Pedro",
+//     "Torres",
+//     60,
+//     56712345,
+//     "San José",
+//     "Independiente",
+//     true
+//   ),
+//   new Persona(
+//     "Gabriela",
+//     "Peralta",
+//     21,
+//     67123456,
+//     "Colonia",
+//     "No Trabaja",
+//     true
+//   ),
+//   new Persona(
+//     "Ernesto",
+//     "Vargas",
+//     73,
+//     71234567,
+//     "Soriano",
+//     "Dependiente",
+//     true
+//   ),
+//   new Persona(
+//     "Inés",
+//     "Aguilar",
+//     45,
+//     81234568,
+//     "Río Negro",
+//     "Independiente",
+//     false
+//   ),
+//   new Persona(
+//     "Julián",
+//     "Cordero",
+//     33,
+//     91234569,
+//     "Lavalleja",
+//     "Estudiante",
+//     false
+//   ),
+//   new Persona(
+//     "Sofía",
+//     "Castillo",
+//     64,
+//     12345691,
+//     "Florida",
+//     "No Trabaja",
+//     false
+//   ),
+//   new Persona("Manuel", "Pinto", 50, 23456912, "Flores", "Dependiente", false),
+//   new Persona("Lucía", "Peña", 37, 34569123, "Rocha", "Estudiante", false),
+//   new Persona(
+//     "Guillermo",
+//     "Navarro",
+//     28,
+//     45691234,
+//     "Treinta y Tres",
+//     "Dependiente",
+//     false
+//   ),
+//   new Persona(
+//     "Rosa",
+//     "Lugo",
+//     22,
+//     56912345,
+//     "Canelones",
+//     "Independiente",
+//     false
+//   ),
+//   new Persona("Rafael", "Ríos", 40, 69123456, "Maldonado", "No Trabaja", false),
+//   new Persona(
+//     "Estela",
+//     "Palma",
+//     71,
+//     91234567,
+//     "Montevideo",
+//     "Estudiante",
+//     false
+//   ),
+//   new Persona(
+//     "Nicolás",
+//     "Vallejo",
+//     46,
+//     12345781,
+//     "Durazno",
+//     "Dependiente",
+//     false
+//   ),
+//   new Persona(
+//     "Mariana",
+//     "Quintero",
+//     35,
+//     23457812,
+//     "Tacuarembó",
+//     "Independiente",
+//     false
+//   ),
+//   new Persona(
+//     "Armando",
+//     "Zúñiga",
+//     64,
+//     34578123,
+//     "Paysandú",
+//     "No Trabaja",
+//     false
+//   ),
+//   new Persona("Isabel", "Vega", 23, 45781234, "Rivera", "Estudiante", false),
+//   new Persona("Carlos", "Yáñez", 39, 57812345, "Salto", "Dependiente", false),
+//   new Persona(
+//     "Graciela",
+//     "Ximénez",
+//     28,
+//     78123456,
+//     "Artigas",
+//     "Independiente",
+//     false
+//   ),
+// ];
 
 class SistemaPersona {
   constructor() {
@@ -303,7 +308,6 @@ class SistemaPersona {
     this.personas.push(objPersona); //Un método que agrega una persona
   }
 
-  
   contadorOcupacion(departamento, ocupacion) {
     let contador = 0;
     for (let i = 0; i < this.personas.length; i++) {

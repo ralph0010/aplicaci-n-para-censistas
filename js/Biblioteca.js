@@ -1,5 +1,6 @@
-import { departamentos } from "./Departamento";
-export class Biblioteca {
+import { departamentos } from "./Departamento.js";
+import { ocupaciones } from "./Ocupacion.js";
+class Biblioteca {
   constructor() {}
   stringValidator(texto) {
     for (let i = 0; i < texto.length; i++) {
@@ -33,12 +34,15 @@ export class Biblioteca {
       document.querySelector("#" + slc).innerHTML += `      
         <option value = "${depart.valor}">${depart.nombre}</option>`; //En la repetitiva aumentamos el select con el array de departamentos en el objeto Departamentos
     });
-    // for (let i = 0; i < departamentos.length; i++) {
-    //   //Recorremos el array de departamentos en la clase sistemaDepartamento
-    //   const Objdepartamento = sistemaDepartamento.departamentos[i]; //
-    //   document.querySelector("#" + slc).innerHTML += `
-    //     <option value = "${Objdepartamento.nombre}">${Objdepartamento.nombre}</option>`; //En la repetitiva aumentamos el select con el array de departamentos en el objeto Departamentos
-    // }
+    
+  }
+  agregarOcupacion(slc) {
+    document.querySelector("#" + slc).innerHTML = `
+    <option value = "-1">Seleccionar</option>`; //Asignamos el primer valor en el id a buscar
+    ocupaciones.forEach((ocupa)=> {
+      document.querySelector("#"+slc).innerHTML += `
+        <option value = "${ocupa.tipo}">${ocupa.nombre}</option>`;
+    })
   }
 }
 export let biblioteca = new Biblioteca();
@@ -80,16 +84,6 @@ function contraseñaValida(contraseña) {
   //agrega datos a la slc del inner html, pasando por parametor el id
 }
 
-function agregarOcupacion(slc) {
-  document.querySelector("#" + slc).innerHTML = `
-  <option value = "-1">Seleccionar</option>`; //Asignamos el primer valor en el id a buscar
-  for (let i = 0; i < sistemaOcupacion.ocupaciones.length; i++) {
-    //Recorremos el array de ocupaciones en la clase SistemaOcupacion.
-    const ocupacion = sistemaOcupacion.ocupaciones[i]; // Le asignamos a ocupacion el valor de la posición "i" del array
-    document.querySelector("#" + slc).innerHTML += `
-      <option value = "${ocupacion.nombre}">${ocupacion.nombre}</option>`; // En la repetitiva sumamos los options  del array
-  }
-}
 
 function vaciarDatos(clase) {
   let datos = document.getElementsByClassName(clase); //Se asigna un array de id, que lo consigue a traves de la clase en el HTML

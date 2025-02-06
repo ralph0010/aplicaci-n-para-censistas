@@ -1,7 +1,7 @@
-import { Censista, juegoDePruebaCensistas } from "./Censista";
-import { Departamento, departamentos, obtenerDepartamentoPorValor } from "./Departamento";
-import { Ocupacion, ocupaciones, retornarOcupacionPorTipo } from "./Ocupacion";
-import { Persona, juegoPruebasPersonas } from "./Persona";
+import { Censista, juegoDePruebaCensistas } from "./Censista.js";
+import { Departamento, departamentos, obtenerDepartamentoPorValor } from "./Departamento.js";
+import { Ocupacion, ocupaciones, retornarOcupacionPorTipo } from "./Ocupacion.js";
+import { Persona } from "./Persona.js";//juegoPruebasPersonas
 
 export class Sistema {
   constructor() {
@@ -15,7 +15,7 @@ export class Sistema {
   agregarArraysAlInicio() {
     this.agregarArray(this.censistas, juegoDePruebaCensistas);
     this.agregarArray(this.departamentos, departamentos);
-    this.agregarArray(this.personas, juegoPruebasPersonas);
+    // this.agregarArray(this.personas); //juegoPruebasPersonas
   }
   //Agrega datos a un array del sistema
   agregarArray(array, datosArray) {
