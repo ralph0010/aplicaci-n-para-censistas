@@ -3,6 +3,7 @@ import { ocupaciones } from "./Ocupacion.js";
 class Biblioteca {
   constructor() {}
   stringValidator(texto) {
+    if(texto === undefined || texto.length === 0) return false;
     for (let i = 0; i < texto.length; i++) {
       //Recorrida del parametro de texto
       let letra = texto.charCodeAt(i); //Creamos una variable que le asignamos el codigo ASCII en cada letra
@@ -44,6 +45,11 @@ class Biblioteca {
         <option value = "${ocupa.tipo}">${ocupa.nombre}</option>`;
     })
   }
+  verificarEdadNoVacia(edad){
+    if(edad == "" || edad == undefined) return -1;
+    else return Number(edad);
+  }
+
 }
 export let biblioteca = new Biblioteca();
 

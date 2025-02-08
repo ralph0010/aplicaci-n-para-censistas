@@ -21,19 +21,17 @@ export class Persona {
       nombre,
       apellido,
       edad,
-      departamento,
-      ocupacion,
       cedula
     );
   }
-  validarPersonas(nombre, apellido, edad, departamento, ocupacion, cedula) {
+  validarPersonas(nombre, apellido, edad, cedula) {
     if (!biblioteca.stringValidator(nombre))
       throw new Error(
         "Error, nombre inválido, revise que los carácteres sean correctos"
       );
     else if (!biblioteca.stringValidator(apellido))
       throw new Error(
-        "Error, nombre inválido, revise que los carácteres sean correctos"
+        "Error, apellido inválido, revise que los carácteres sean correctos"
       );
     else if (!this.#cumpleEdad(edad))
       throw new Error(
@@ -66,7 +64,7 @@ export class Persona {
       replicarCedula = "0" + cedula; //Si la cedula contiene 7 caracteres le sumamos un 0 a la variable
     }
 
-    for (let i = 0; i < multiplicador; i++) {
+    for (let i = 0; i < multiplicador.length; i++) {
       //Recorremos las posiciones del multiplicador
       resultado +=
         Number(multiplicador.charAt(i)) * Number(replicarCedula.charAt(i)); //La posición que recibimos como text, lo modificamos a Number

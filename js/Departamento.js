@@ -1,32 +1,43 @@
+
 const valorMinimoDepartamento = 1;
-const valorMaximoDepartamento =19;
+const valorMaximoDepartamento = 19;
+
 export class Departamento {
-  constructor(nombre, valor)
-   {
+  constructor(nombre, valor) {
     this.nombre = nombre;
     this.valor = valor;
   }
-  
-  obtenerDepartamento(nombreDepartamento){
+
+  obtenerDepartamento(nombreDepartamento) {
     for (const departamento of departamentos) {
-      if(departamento.nombre.toLowerCase()== nombreDepartamento.toLowerCase()) return departamento;
+      if (departamento.nombre.toLowerCase() == nombreDepartamento.toLowerCase())
+        return departamento;
     }
     return null;
   }
 }
-export function obtenerDepartamentoPorValor(valorDepartamento){
+export function obtenerDepartamentoPorValor(valorDepartamento) {
   validarDepartamento(valorDepartamento);
-  departamentos.forEach(departArray => {
-    if(departArray.valor === valorDepartamento) return departamento;
-  });
-  throw new Error ("Error, no se encontró el departamento"); 
-}
-function validarDepartamento(departamento){
-  if(departamento.valor <valorMinimoDepartamento || departamento.valor > valorMaximoDepartamento){
-    throw new Error("Error, el departamento seleccionado no es correcto");
+  let departamentoRetorno = null; 
+  departamentoRetorno = departamentos.find(({valor}) => 
+    Number(valor) == Number(valorDepartamento)
+  );
+
+  if(departamentoRetorno === null || departamentoRetorno === undefined) throw new Error("No se encontró el departamento");
+  else{
+    return departamentoRetorno;
   }
 }
-export const departamentos = [new Departamento("Artigas", 1),
+function validarDepartamento(departamento) {
+  if (
+    departamento < valorMinimoDepartamento ||
+    departamento > valorMaximoDepartamento
+  ) {
+    throw new Error("El departamento seleccionado no es correcto");
+  }
+}
+export const departamentos = [
+  new Departamento("Artigas", 1),
   new Departamento("Canelones", 2),
   new Departamento("Cerro Largo", 3),
   new Departamento("Colonia", 4),
@@ -44,6 +55,5 @@ export const departamentos = [new Departamento("Artigas", 1),
   new Departamento("San José", 16),
   new Departamento("Soriano", 17),
   new Departamento("Tacuarembó", 18),
-  new Departamento("Treinta y Tres", 19)];
-
-
+  new Departamento("Treinta y Tres", 19),
+];

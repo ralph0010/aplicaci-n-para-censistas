@@ -66,7 +66,7 @@ export class Sistema {
     let departamento = obtenerDepartamentoPorValor(valorDepartamento);
     let ocupacion = retornarOcupacionPorTipo(valorOcupacion);
     let nuevaPersona =new Persona(nombre,apellido,edad,cedula,departamento,ocupacion, validado);
-    if(this.existePersona(nuevaPersona.cedula)) throw new Error("error, la cédula ya se encuentra registrada en el sistema");
+    if(this.existePersona(nuevaPersona.cedula)) throw new Error("La cédula ya se encuentra registrada en el sistema");
     else {
         this.agregarArray(this.personas, nuevaPersona)
         if(!validado) this.asignarACensista(nuevaPersona);
