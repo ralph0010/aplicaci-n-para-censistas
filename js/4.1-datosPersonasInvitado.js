@@ -12,7 +12,9 @@ biblioteca.agregarOcupacion("slcOcupacionInvitado"); //Funcion en la biblioteca
 function mensajeAgregado(nombre, apellido) {
   return `Se ha agregado correctamente a ${nombre} ${apellido} al sistema`;
 }
-
+function mensajeAgregadoInvitado(nombre, apellido){
+  return `${nombre} ${apellido} se agregó correctamente sus datos al censo. Un censista llegará para corroborar sus datos, ¡Gracias!`
+}
 function ingresarPersonaInvitado() {
     let mensaje = document.querySelector("#pMensajeIngresarInvitado")
   try {
@@ -36,6 +38,8 @@ function ingresarPersonaInvitado() {
       ocupacion,
       false
     );
+    mensaje.innerHTML = mensajeAgregadoInvitado(nombre, apellido);
+
   } catch (error) {
     mensaje.innerHTML = error;
   }

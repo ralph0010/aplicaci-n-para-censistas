@@ -1,7 +1,18 @@
+// let censistas = [];
+// let personas = [];
+
 import { Censista, juegoDePruebaCensistas } from "./Censista.js";
-import { Departamento, departamentos, obtenerDepartamentoPorValor } from "./Departamento.js";
-import { Ocupacion, ocupaciones, retornarOcupacionPorTipo } from "./Ocupacion.js";
-import { Persona } from "./Persona.js";//juegoPruebasPersonas
+import {
+  Departamento,
+  departamentos,
+  obtenerDepartamentoPorValor,
+} from "./Departamento.js";
+import {
+  Ocupacion,
+  ocupaciones,
+  retornarOcupacionPorTipo,
+} from "./Ocupacion.js";
+import { Persona } from "./Persona.js"; //juegoPruebasPersonas
 
 export class Sistema {
   constructor() {
@@ -62,22 +73,39 @@ export class Sistema {
     //el numero es un numero aleatorio entre 0 y 1 multiplicado por el maximo
     this.censistas[numero].personasACargo.push(persona); //hace un push al arreglo de censista.personasACargo de la cedula de la persona asignada
   }
-  agregarPersona(nombre, apellido, edad, cedula,valorDepartamento, valorOcupacion, validado){
+  agregarPersona(
+    nombre,
+    apellido,
+    edad,
+    cedula,
+    valorDepartamento,
+    valorOcupacion,
+    validado
+  ) {
     let departamento = obtenerDepartamentoPorValor(valorDepartamento);
     let ocupacion = retornarOcupacionPorTipo(valorOcupacion);
-    let nuevaPersona =new Persona(nombre,apellido,edad,cedula,departamento,ocupacion, validado);
-    if(this.existePersona(nuevaPersona.cedula)) throw new Error("La cédula ya se encuentra registrada en el sistema");
-    else {
-        this.agregarArray(this.personas, nuevaPersona)
-        if(!validado) this.asignarACensista(nuevaPersona);
-    };
+    let nuevaPersona = new Persona(
+      nombre,
+      apellido,
+      edad,
+      cedula,
+      departamento,
+      ocupacion,
+      validado
+    );
+    if (this.existePersona(nuevaPersona.cedula))
+      throw new Error("La cédula ya se encuentra registrada en el sistema");
+    this.agregarObjeto(nuevaPersona, this.personas);
+    if (!validado) this.asignarACensista(nuevaPersona);
   }
 
   existePersona(cedulaPersona) {
-    this.personas.forEach(persona => {
-        if(persona.cedula === cedulaPersona) return true
-    });
-    return false;
+    // this.personas.forEach(persona => {
+    //     if(persona.cedula === cedulaPersona) return true
+    // });
+    // return false;
+    let retorno = this.personas.includes(cedulaPersona);
+    return retorno;
   }
 
   mostrarCensistaAsignado(cedula) {

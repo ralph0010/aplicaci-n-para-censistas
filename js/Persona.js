@@ -27,15 +27,15 @@ export class Persona {
   validarPersonas(nombre, apellido, edad, cedula) {
     if (!biblioteca.stringValidator(nombre))
       throw new Error(
-        "Error, nombre inválido, revise que los carácteres sean correctos"
+        "Nombre inválido, revise que los carácteres sean correctos"
       );
     else if (!biblioteca.stringValidator(apellido))
       throw new Error(
-        "Error, apellido inválido, revise que los carácteres sean correctos"
+        "Apellido inválido, revise que los carácteres sean correctos"
       );
     else if (!this.#cumpleEdad(edad))
       throw new Error(
-        "Error, la edad ingresada es incorrecta, ingrese un número del 0 hasta 130"
+        "La edad ingresada es incorrecta, ingrese un número del 0 hasta 130"
       );
     this.#validarCedula(cedula);
   }
