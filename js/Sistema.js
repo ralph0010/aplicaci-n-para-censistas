@@ -45,25 +45,22 @@ export class Sistema {
     this.censistas.push(objCensista); //Sirve para agregar un nuevo censista
   }
 
-  loginCorrecto(nombreUsuario, passUsuario) {
-    //Parametros que usamos para la funcion
-    let login = false; //Login inicialmente false para ahorro de código
-
-    for (let i = 0; i < this.censistas.length; i++) {
-      //Recorremos el array de censistas
-      const Usuario = this.censistas[i]; //Le asignamos un valor de repetitiva a la variable Usuario, que va ir pasando por cada Cencista
-
-      if (
-        Usuario.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
-        Usuario.contraseña === passUsuario
-      ) {
-        //Si en la repetitiva cumple los parametros que son iguales al usuario y contraseña
-        login = true; //Cambiamos el login cuando cumple el if
-        break; //Salimos de la repetitiva
-      }
-    }
-
-    return login;
+  loginCensista(nombreUsuario, passUsuario) {
+    // for (let i = 0; i < this.censistas.length; i++) {
+    //   const censista = this.censistas[i]; //Le asignamos un valor de repetitiva a la variable Usuario, que va ir pasando por cada Cencista
+    //   if (
+    //     censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
+    //     censista.contraseña === passUsuario
+    //   ) {
+    //     return censista;
+    //   }
+    // }
+    const retorno = this.censistas.find((censista) => {
+      censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
+        censista.password === passUsuario;
+    });
+    if(retorno == undefined || retorno =="") throw new Error("Error, usuario y/o contraseña incorrectos");
+    return retorno;
   }
   asignarACensista(persona) {
     //metodo que asigna una persona a un censista aleatorio
@@ -98,7 +95,7 @@ export class Sistema {
     this.agregarObjeto(nuevaPersona, this.personas);
     if (!validado) this.asignarACensista(nuevaPersona);
   }
-
+  //TO DO
   existePersona(cedulaPersona) {
     // this.personas.forEach(persona => {
     //     if(persona.cedula === cedulaPersona) return true

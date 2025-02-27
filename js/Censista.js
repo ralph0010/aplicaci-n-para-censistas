@@ -1,10 +1,10 @@
  
 export class Censista {
-  constructor(nombre, apellido, usuario, contraseña, personasACargo) {
+  constructor(nombre, apellido, usuario, password, personasACargo) {
     this.nombre = nombre;
     this.apellido = apellido;
     this.usuario = usuario;
-    this.contraseña = contraseña;
+    this.password = password;
     this.personasACargo = personasACargo;
   }
 }
