@@ -1,20 +1,19 @@
-// let censistas = [];
-// let personas = [];
 
-import { Censista, juegoDePruebaCensistas } from "./Censista.js";
+
+import { Censista, juegoDePruebaCensistas } from "../Censista.js";
 import {
   Departamento,
   departamentos,
   obtenerDepartamentoPorValor,
-} from "./Departamento.js";
+} from "../Departamento.js";
 import {
   Ocupacion,
   ocupaciones,
   retornarOcupacionPorTipo,
-} from "./Ocupacion.js";
-import { Persona } from "./Persona.js"; //juegoPruebasPersonas
+} from "../Ocupacion.js";
+import { Persona } from "../Persona.js"; //juegoPruebasPersonas
 
-export class Sistema {
+class Sistema {
   constructor() {
     this.censistas = [];
     this.departamentos = [];
@@ -162,4 +161,4 @@ export class Sistema {
   }
 }
 
-export let sistema = new Sistema(); // le damos la funcionalidad al sistema
+export let sistemaCenso = new Sistema(); // le damos la funcionalidad al sistema

@@ -1,4 +1,4 @@
-import { sistema } from "./sistema.js";
+import { sistemaCenso } from "./sistema/sistema.js";
 import { biblioteca } from "./biblioteca.js";
 
 document
@@ -29,7 +29,7 @@ function ingresarPersona(
 ) {
   //Verificamos la edad no este vacia:
   edad = biblioteca.verificarEdadNoVacia(edad);
-  sistema.agregarPersona(
+  sistemaCenso.agregarPersona(
     nombre,
     apellido,
     edad,
