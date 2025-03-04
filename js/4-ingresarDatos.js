@@ -60,6 +60,8 @@ function ingresarPersonaCensista() {
       true
     );
     mensaje.innerHTML = mensajeAgregadoCensista(nombre, apellido);
+    // mostrarLista(); 
+    // mostrarTablaDepartamento()
   }catch (error){
     mensaje.innerHTML = error;
   }

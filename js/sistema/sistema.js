@@ -83,9 +83,11 @@ class Sistema {
     if (this.existePersona(nuevaPersona.cedula))
       throw new Error("La cédula ya se encuentra registrada en el sistema");
     this.agregarObjeto(nuevaPersona, this.personas);
-    if (!validado) this.asignarACensista(nuevaPersona);
+    if (!validado) {this.asignarACensista(nuevaPersona);}
+    else {
+      departamento.cantidadCensados++;
+    }
   }
-  //TO DO
   existePersona(cedulaPersona) {
     let retorno = this.personas.some(persona => 
       persona.cedula === cedulaPersona

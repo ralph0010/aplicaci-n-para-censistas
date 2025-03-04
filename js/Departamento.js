@@ -6,6 +6,7 @@ export class Departamento {
   constructor(nombre, valor) {
     this.nombre = nombre;
     this.valor = valor;
+    this.cantidadCensados = 0;
   }
 
   obtenerDepartamento(nombreDepartamento) {
