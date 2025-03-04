@@ -54,10 +54,10 @@ class Sistema {
     //     return censista;
     //   }
     // }
-    const retorno = this.censistas.find((censista) => {
+    let retorno = this.censistas.find((censista) => 
       censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
-        censista.password === passUsuario;
-    });
+        censista.password === passUsuario
+    );
     if(retorno == undefined || retorno =="") throw new Error("Error, usuario y/o contraseña incorrectos");
     return retorno;
   }

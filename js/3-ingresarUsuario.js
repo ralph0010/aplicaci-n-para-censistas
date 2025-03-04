@@ -18,7 +18,7 @@ function loguearUsuario(){
       mostrarBotones("censistaTerciario"); //funcion en secciones
          ocultarMenus("censistaIniciar")//funcion en secciones
          cambiarSeccion("seccionIngresarDatosPersona")//funcion en secciones
-         agregarArregloPersonasSinValidar() //funcion en ObjPersona
+         // agregarArregloPersonasSinValidar() //funcion en ObjPersona
       // if(sistema.loginCensista(nombreUsuario, passUsuario)){ //funcion en Objcensista
       //    mensaje = "Login correcto";
    
