@@ -45,15 +45,6 @@ class Sistema {
   }
 
   loginCensista(nombreUsuario, passUsuario) {
-    // for (let i = 0; i < this.censistas.length; i++) {
-    //   const censista = this.censistas[i]; //Le asignamos un valor de repetitiva a la variable Usuario, que va ir pasando por cada Cencista
-    //   if (
-    //     censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
-    //     censista.contraseña === passUsuario
-    //   ) {
-    //     return censista;
-    //   }
-    // }
     let retorno = this.censistas.find((censista) => 
       censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
         censista.password === passUsuario
@@ -96,11 +87,9 @@ class Sistema {
   }
   //TO DO
   existePersona(cedulaPersona) {
-    // this.personas.forEach(persona => {
-    //     if(persona.cedula === cedulaPersona) return true
-    // });
-    // return false;
-    let retorno = this.personas.includes(cedulaPersona);
+    let retorno = this.personas.some(persona => 
+      persona.cedula === cedulaPersona
+    );
     return retorno;
   }
 
