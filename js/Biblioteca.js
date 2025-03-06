@@ -50,6 +50,12 @@ class Biblioteca {
     else return Number(edad);
   }
 
+  verficarCampoNoVacio(campo, nombreCampo){
+    if(campo ==null || campo == undefined || campo == "")
+      throw new Error(`${nombreCampo} no puede estar vacío`);
+    return campo;
+  }
+
 }
 export let biblioteca = new Biblioteca();
 

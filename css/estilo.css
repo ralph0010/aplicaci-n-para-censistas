@@ -211,3 +211,16 @@ input[type="button"]:disabled {
 .link {
     color: #FFFAFF;
 }
+#aRegistrarUsuario{
+  background-color: #c11ca0;
+  padding: .5em;
+  border-radius: 5px;
+  
+}
+
+#aRegistrarUsuario:hover{
+  background-color: #48B9A9;
+}
+.btn:hover{
+  cursor: pointer;
+}

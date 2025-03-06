@@ -18,23 +18,6 @@ function loguearUsuario(){
       mostrarBotones("censistaTerciario"); //funcion en secciones
          ocultarMenus("censistaIniciar")//funcion en secciones
          cambiarSeccion("seccionIngresarDatosPersona")//funcion en secciones
-         // agregarArregloPersonasSinValidar() //funcion en ObjPersona
-      // if(sistema.loginCensista(nombreUsuario, passUsuario)){ //funcion en Objcensista
-      //    mensaje = "Login correcto";
-   
-      //    mostrarBotones("censistaTerciario"); //funcion en secciones
-      //    ocultarMenus("censistaIniciar")//funcion en secciones
-      //    cambiarSeccion("seccionIngresarDatosPersona")//funcion en secciones
-      //    agregarArregloPersonasSinValidar() //funcion en ObjPersona
-      //    usuariologin = nombreUsuario;
-   
-      //    mostrarCedulasACargo(usuariologin)  //funcion en ValidarCensoDeUnaPersona
-         
-      //    agregarCensitas(); // La función se encuentra en reasignar censista.
-      //    agregarPendientes(); // La función se encuentra en reasignar censista.
-      // } else {
-      //    mensaje = "Usuario y/o contraseña incorrectas";
-      // }
       mensaje.innerHTML = "Login exitoso, bienvenido";
 
    } catch (error){

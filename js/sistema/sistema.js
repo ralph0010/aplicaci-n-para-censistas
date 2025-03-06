@@ -1,5 +1,3 @@
-
-
 import { Censista, juegoDePruebaCensistas } from "../Censista.js";
 import {
   Departamento,
@@ -38,19 +36,22 @@ class Sistema {
   agregarObjeto(objecto, array) {
     array.push(objecto);
   }
-
-  //----------------------------------Viejas funcionalidades
-  agregarCensista(objCensista) {
-    this.censistas.push(objCensista); //Sirve para agregar un nuevo censista
-  }
-
+  //Realiza el logueo del censista
   loginCensista(nombreUsuario, passUsuario) {
-    let retorno = this.censistas.find((censista) => 
-      censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
+    let retorno = this.censistas.find(
+      (censista) =>
+        censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
         censista.password === passUsuario
     );
-    if(retorno == undefined || retorno =="") throw new Error("Error, usuario y/o contraseña incorrectos");
+    if (retorno == undefined || retorno == "")
+      throw new Error("Error, usuario y/o contraseña incorrectos");
     return retorno;
+  }
+
+  registrarCensista(nombre, apellido, usuario, password){
+    nuevoCensista = new Censista(nombre, apellido, usuario, password);
+    if(this.existeCensista(usuario)) throw new Error("El nombre de usuario ya existe en el sistema");
+    this.censistas.push(nuevoCensista);  
   }
   asignarACensista(persona) {
     //metodo que asigna una persona a un censista aleatorio
@@ -83,15 +84,24 @@ class Sistema {
     if (this.existePersona(nuevaPersona.cedula))
       throw new Error("La cédula ya se encuentra registrada en el sistema");
     this.agregarObjeto(nuevaPersona, this.personas);
-    if (!validado) {this.asignarACensista(nuevaPersona);}
-    else {
+    if (!validado) {
+      this.asignarACensista(nuevaPersona);
+    } else {
       departamento.cantidadCensados++;
     }
   }
   existePersona(cedulaPersona) {
-    let retorno = this.personas.some(persona => 
-      persona.cedula === cedulaPersona
+    let retorno = this.personas.some(
+      (persona) => persona.cedula === cedulaPersona
     );
+    return retorno;
+  }
+  existeCensista(userCensista) {
+    let retorno = this.censistas.some(
+      (censista) =>
+        censista.usuario.toLowerCase() === userCensista.toLowerCase()
+    );
+
     return retorno;
   }
 
