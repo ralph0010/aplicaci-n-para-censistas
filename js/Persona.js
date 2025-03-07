@@ -50,34 +50,10 @@ export class Persona {
 
   #validarCedula(cedula) {
     this.#validarCantidadDigitosCedulas(cedula);
-    if (!this.#cedulaEsValida(cedula))
+    if (!cedulaEsValida(cedula))
       throw new Error("La cédula ingresada no es válidad");
   }
-  #cedulaEsValida(cedula) {
-    let replicarCedula = ""+cedula; // Asignamos a una variable la cedula para poder modificarla después.
-    let multiplicador = "2987634"; // Variable que utilizaremos para comprobar si la cédula es válida
-    let resultado = 0; //Variable que sumaremos más adelante en la repetitiva
-    let digitoVerificador = replicarCedula.charAt(replicarCedula.length - 1); //El valor del ultimo digito de la cédula
-
-    //console.log(digitoVerificador)
-    if (cedula.length === 7) {
-      replicarCedula = "0" + cedula; //Si la cedula contiene 7 caracteres le sumamos un 0 a la variable
-    }
-
-    for (let i = 0; i < multiplicador.length; i++) {
-      //Recorremos las posiciones del multiplicador
-      resultado +=
-        Number(multiplicador.charAt(i)) * Number(replicarCedula.charAt(i)); //La posición que recibimos como text, lo modificamos a Number
-    }
-
-    if (((resultado % 10) + Number(digitoVerificador)) % 10 === 0) {
-      // obtenemos el valor del resto y le sumamos al numero verificador, luego obtenemos el resto de dividido 10. Si el valor final es igual a 0 cumple la funcion;
-      return true;
-    }
-    //console.log(resultado % 10 + Number(digitoVerificador))
-
-    return false; //Retornamos si cumple o no cumple el parametro llegado como cédula
-  }
+  
   #validarCantidadDigitosCedulas(cedula) {
     if (cedula.length < 7 || cedula.length > 8)
       throw new Error("Error, la cédula debe contener entre 7 y 8 dígitos");
@@ -97,372 +73,414 @@ export class Persona {
   }
 }
 
-// export const juegoPruebasPersonas = [
-//   new Persona(
-//     "Nicolás",
-//     "Martinez",
-//     46,
-//     12345754,
-//     "Durazno",
-//     "Dependiente",
-//     true
-//   ),
-//   new Persona("Ana", "González", 27, 23456789, "Canelones", "Estudiante", true),
-//   new Persona(
-//     "Luis",
-//     "Rodríguez",
-//     55,
-//     34567890,
-//     "Maldonado",
-//     "Independiente",
-//     true
-//   ),
-//   new Persona("María", "García", 67, 45678901, "Salto", "No Trabaja", true),
-//   new Persona(
-//     "Pablo",
-//     "Martínez",
-//     34,
-//     56789012,
-//     "Paysandú",
-//     "Dependiente",
-//     true
-//   ),
-//   new Persona(
-//     "Carmen",
-//     "Fernández",
-//     48,
-//     67890123,
-//     "Rivera",
-//     "Independiente",
-//     true
-//   ),
-//   new Persona("Diego", "López", 31, 78901234, "Tacuarembó", "Estudiante", true),
-//   new Persona(
-//     "Teresa",
-//     "Sánchez",
-//     25,
-//     89012345,
-//     "Cerro Largo",
-//     "Dependiente",
-//     true
-//   ),
-//   new Persona("Sergio", "Silva", 52, 90123456, "Rocha", "Independiente", true),
-//   new Persona(
-//     "Beatriz",
-//     "Ramírez",
-//     44,
-//     23456712,
-//     "Treinta y Tres",
-//     "No Trabaja",
-//     true
-//   ),
-//   new Persona(
-//     "Rodrigo",
-//     "Mendoza",
-//     30,
-//     34567123,
-//     "Durazno",
-//     "Independiente",
-//     true
-//   ),
-//   new Persona(
-//     "Laura",
-//     "Gutierrez",
-//     29,
-//     45671234,
-//     "Artigas",
-//     "Estudiante",
-//     true
-//   ),
-//   new Persona(
-//     "Pedro",
-//     "Torres",
-//     60,
-//     56712345,
-//     "San José",
-//     "Independiente",
-//     true
-//   ),
-//   new Persona(
-//     "Gabriela",
-//     "Peralta",
-//     21,
-//     67123456,
-//     "Colonia",
-//     "No Trabaja",
-//     true
-//   ),
-//   new Persona(
-//     "Ernesto",
-//     "Vargas",
-//     73,
-//     71234567,
-//     "Soriano",
-//     "Dependiente",
-//     true
-//   ),
-//   new Persona(
-//     "Inés",
-//     "Aguilar",
-//     45,
-//     81234568,
-//     "Río Negro",
-//     "Independiente",
-//     false
-//   ),
-//   new Persona(
-//     "Julián",
-//     "Cordero",
-//     33,
-//     91234569,
-//     "Lavalleja",
-//     "Estudiante",
-//     false
-//   ),
-//   new Persona(
-//     "Sofía",
-//     "Castillo",
-//     64,
-//     12345691,
-//     "Florida",
-//     "No Trabaja",
-//     false
-//   ),
-//   new Persona("Manuel", "Pinto", 50, 23456912, "Flores", "Dependiente", false),
-//   new Persona("Lucía", "Peña", 37, 34569123, "Rocha", "Estudiante", false),
-//   new Persona(
-//     "Guillermo",
-//     "Navarro",
-//     28,
-//     45691234,
-//     "Treinta y Tres",
-//     "Dependiente",
-//     false
-//   ),
-//   new Persona(
-//     "Rosa",
-//     "Lugo",
-//     22,
-//     56912345,
-//     "Canelones",
-//     "Independiente",
-//     false
-//   ),
-//   new Persona("Rafael", "Ríos", 40, 69123456, "Maldonado", "No Trabaja", false),
-//   new Persona(
-//     "Estela",
-//     "Palma",
-//     71,
-//     91234567,
-//     "Montevideo",
-//     "Estudiante",
-//     false
-//   ),
-//   new Persona(
-//     "Nicolás",
-//     "Vallejo",
-//     46,
-//     12345781,
-//     "Durazno",
-//     "Dependiente",
-//     false
-//   ),
-//   new Persona(
-//     "Mariana",
-//     "Quintero",
-//     35,
-//     23457812,
-//     "Tacuarembó",
-//     "Independiente",
-//     false
-//   ),
-//   new Persona(
-//     "Armando",
-//     "Zúñiga",
-//     64,
-//     34578123,
-//     "Paysandú",
-//     "No Trabaja",
-//     false
-//   ),
-//   new Persona("Isabel", "Vega", 23, 45781234, "Rivera", "Estudiante", false),
-//   new Persona("Carlos", "Yáñez", 39, 57812345, "Salto", "Dependiente", false),
-//   new Persona(
-//     "Graciela",
-//     "Ximénez",
-//     28,
-//     78123456,
-//     "Artigas",
-//     "Independiente",
-//     false
-//   ),
-// ];
+// console.log(generarIdsValidos());
 
-class SistemaPersona {
-  constructor() {
-    this.personas = [];
-  }
-  agregarPersona(objPersona) {
-    this.personas.push(objPersona); //Un método que agrega una persona
-  }
+function generarCedulasAleatorias() {
+  let idsValidos = [];
+  while (idsValidos.length < 30) {
+      // Generar un ID de 8 dígitos al azar
+      let id = Array.from({ length: 8 }, () => Math.floor(Math.random() * 10)).join("");
 
-  contadorOcupacion(departamento, ocupacion) {
-    let contador = 0;
-    for (let i = 0; i < this.personas.length; i++) {
-      //recorre el arreglo personas
-      const objPersona = this.personas[i];
-      if (
-        departamento === objPersona.departamento && //evalua si el departamento ingresado coincide con un departamento en el arreglo departamento
-        objPersona.ocupacion === ocupacion //a la vez, evalua si la ocupacion ingresada coincide con la ocupacion de esa persona
-      ) {
-        contador++; //en caso de coincidir, el contador suma 1
+      // Validar el ID
+      if (cedulaEsValida(id)) {
+          idsValidos.push(id); // Añadimos el ID si es válido
       }
-    }
-    return contador; //retorna una cantidad
   }
-
-  porcentajeDepartamento(departamento) {
-    //metodo que retorna el porcentaje de personas por departamento
-    let contador = 0;
-    for (let i = 0; i < this.personas.length; i++) {
-      const objPersona = this.personas[i];
-      if (departamento === objPersona.departamento) {
-        contador++;
-      }
-    }
-
-    let porcentaje = Math.round((contador * 100) / this.personas.length);
-    return porcentaje;
-  }
-
-  contadorPendientesAValidar() {
-    //retorna el porcentaje de personas por departamento
-    let contador = 0;
-    for (let i = 0; i < this.personas.length; i++) {
-      const objPersona = this.personas[i];
-      if (objPersona.validado === false) {
-        contador++;
-      }
-    }
-    let porcentaje = Math.round((contador * 100) / this.personas.length);
-
-    return porcentaje;
-  }
-
-  contadorEdadDepartamento(departamento, minimo, maximo) {
-    //retorna el porcentaje de edad por departamento
-    let contador = 0;
-    let contadorTotal = 0;
-    for (let a = 0; a < this.personas.length; a++) {
-      const objContar = this.personas[a];
-      if (objContar.departamento === departamento) {
-        contadorTotal++;
-      }
-    }
-
-    for (let i = 0; i < this.personas.length; i++) {
-      const objPersona = this.personas[i];
-      if (
-        departamento === objPersona.departamento &&
-        objPersona.edad < maximo &&
-        objPersona.edad >= minimo
-      ) {
-        contador++;
-      }
-    }
-
-    let porcentaje = Math.round((contador * 100) / contadorTotal);
-    return porcentaje;
-  }
-
-  contadorPersonasDepartamento(departamento) {
-    //retorna la cantidad de personas por departamento
-    let contador = 0;
-    for (let i = 0; i < this.personas.length; i++) {
-      const objPersona = this.personas[i];
-      if (objPersona.departamento === departamento) {
-        contador++;
-      }
-    }
-    return contador;
-  }
-
-  modificarPersona(cedula, nombre, apellido, edad, departamento, ocupacion) {
-    //modifica una persona
-    for (let i = 0; i < this.personas.length; i++) {
-      const unaPersona = this.personas[i];
-
-      if (cedula === unaPersona.cedula) {
-        unaPersona.nombre = nombre;
-        unaPersona.apellido = apellido;
-        unaPersona.edad = edad;
-        unaPersona.departamento = departamento;
-        unaPersona.ocupacion = ocupacion;
-
-        break;
-      }
-    }
-  }
-
-  nombreYApellido(cedula) {
-    // dada una cedula, devuelve el nombre y el apellido de la persona
-    let nombre;
-    for (let i = 0; i < this.personas.length; i++) {
-      const objPersona = this.personas[i];
-      if (objPersona.cedula === cedula) {
-        nombre = objPersona.nombre + " " + objPersona.apellido;
-        break;
-      }
-    }
-
-    return nombre;
-  }
+  return idsValidos;
 }
 
-let sistemaPersona = new SistemaPersona();
+function cedulaEsValida(cedula) {
+  let replicarCedula = ""+cedula; // Asignamos a una variable la cedula para poder modificarla después.
+  let multiplicador = "2987634"; // Variable que utilizaremos para comprobar si la cédula es válida
+  let resultado = 0; //Variable que sumaremos más adelante en la repetitiva
+  let digitoVerificador = replicarCedula.charAt(replicarCedula.length - 1); //El valor del ultimo digito de la cédula
 
-let personasSinValidar = [];
-agregarArregloPersonasSinValidar();
-agregarSinValidarACensistas();
-
-function agregarSinValidarACensistas() {
-  //asigna personas sin validar a censista
-  for (let a = 0; a < personasSinValidar.length; a++) {
-    sistema.asignarACensista(personasSinValidar[a]);
+  //console.log(digitoVerificador)
+  if (cedula.length === 7) {
+    replicarCedula = "0" + cedula; //Si la cedula contiene 7 caracteres le sumamos un 0 a la variable
   }
+
+  for (let i = 0; i < multiplicador.length; i++) {
+    //Recorremos las posiciones del multiplicador
+    resultado +=
+      Number(multiplicador.charAt(i)) * Number(replicarCedula.charAt(i)); //La posición que recibimos como text, lo modificamos a Number
+  }
+
+  if (((resultado % 10) + Number(digitoVerificador)) % 10 === 0) {
+    // obtenemos el valor del resto y le sumamos al numero verificador, luego obtenemos el resto de dividido 10. Si el valor final es igual a 0 cumple la funcion;
+    return true;
+  }
+  //console.log(resultado % 10 + Number(digitoVerificador))
+
+  return false; //Retornamos si cumple o no cumple el parametro llegado como cédula
 }
 
-function agregarArregloPersonasSinValidar() {
-  //agrega personas sin validar al arreglo personas sin validar
-  for (let i = 0; i < sistemaPersona.personas.length; i++) {
-    const objPersona = sistemaPersona.personas[i];
-    if (objPersona.validado === false) {
-      if (!verificarArray(personasSinValidar, objPersona.cedula)) {
-        personasSinValidar.push(objPersona.cedula);
-      }
-    }
-  }
-}
+export const juegoPruebasPersonas = [
+  new Persona(
+    "Nicolás",
+    "Martinez",
+    46,
+    73958145,
+    "Durazno",
+    "Dependiente",
+    true
+  ),
+  new Persona("Ana", "González", 27, 88464123, "Canelones", "Estudiante", true),
+  new Persona(
+    "Luis",
+    "Rodríguez",
+    55,
+    64517423,
+    "Maldonado",
+    "Independiente",
+    true
+  ),
+  new Persona("María", "García", 67, 23810359, "Salto", "No Trabaja", true),
+  new Persona(
+    "Pablo",
+    "Martínez",
+    34,
+    66417768,
+    "Paysandú",
+    "Dependiente",
+    true
+  ),
+  new Persona(
+    "Carmen",
+    "Fernández",
+    48,
+    99991351,
+    "Rivera",
+    "Independiente",
+    true
+  ),
+  new Persona("Diego", "López", 31, 72352370, "Tacuarembó", "Estudiante", true),
+  new Persona(
+    "Teresa",
+    "Sánchez",
+    25,
+    33299822,
+    "Cerro Largo",
+    "Dependiente",
+    true
+  ),
+  new Persona("Sergio", "Silva", 52, 60988858, "Rocha", "Independiente", true),
+  new Persona(
+    "Beatriz",
+    "Ramírez",
+    44,
+    31325994,
+    "Treinta y Tres",
+    "No Trabaja",
+    true
+  ),
+  new Persona(
+    "Rodrigo",
+    "Mendoza",
+    30,
+    13580691,
+    "Durazno",
+    "Independiente",
+    true
+  ),
+  new Persona(
+    "Laura",
+    "Gutierrez",
+    29,
+    67276662,
+    "Artigas",
+    "Estudiante",
+    true
+  ),
+  new Persona(
+    "Pedro",
+    "Torres",
+    60,
+    57898701,
+    "San José",
+    "Independiente",
+    true
+  ),
+  new Persona(
+    "Gabriela",
+    "Peralta",
+    21,
+    10150942,
+    "Colonia",
+    "No Trabaja",
+    true
+  ),
+  new Persona(
+    "Ernesto",
+    "Vargas",
+    73,
+    20660454,
+    "Soriano",
+    "Dependiente",
+    true
+  ),
+  new Persona(
+    "Inés",
+    "Aguilar",
+    45,
+    14460296,
+    "Río Negro",
+    "Independiente",
+    false
+  ),
+  new Persona(
+    "Julián",
+    "Cordero",
+    33,
+    12679009,
+    "Lavalleja",
+    "Estudiante",
+    false
+  ),
+  new Persona(
+    "Sofía",
+    "Castillo",
+    64,
+    10688147,
+    "Florida",
+    "No Trabaja",
+    false
+  ),
+  new Persona("Manuel", "Pinto", 50, 74469212, "Flores", "Dependiente", false),
+  new Persona("Lucía", "Penha", 37, 44677853, "Rocha", "Estudiante", false),
+  new Persona(
+    "Guillermo",
+    "Navarro",
+    28,
+    19840011,
+    "Treinta y Tres",
+    "Dependiente",
+    false
+  ),
+  new Persona(
+    "Rosa",
+    "Lugo",
+    22,
+    70994552,
+    "Canelones",
+    "Independiente",
+    false
+  ),
+  new Persona("Rafael", "Ríos", 40, 67647364, "Maldonado", "No Trabaja", false),
+  new Persona(
+    "Estela",
+    "Palma",
+    71,
+    20900292,
+    "Montevideo",
+    "Estudiante",
+    false
+  ),
+  new Persona(
+    "Nicolás",
+    "Vallejo",
+    46,
+    98665367,
+    "Durazno",
+    "Dependiente",
+    false
+  ),
+  new Persona(
+    "Mariana",
+    "Quintero",
+    35,
+    77050553,
+    "Tacuarembó",
+    "Independiente",
+    false
+  ),
+  new Persona(
+    "Armando",
+    "Zúnhiga",
+    64,
+    23813715,
+    "Paysandú",
+    "No Trabaja",
+    false
+  ),
+  new Persona("Isabel", "Vega", 23, 47190741, "Rivera", "Estudiante", false),
+  new Persona("Carlos", "Yánhez", 39, 87559347, "Salto", "Dependiente", false),
+  new Persona(
+    "Graciela",
+    "Ximénez",
+    28,
+    70626672,
+    "Artigas",
+    "Independiente",
+    false
+  ),
+];
 
-function verificarArray(array, cedula) {
-  //verifica si existe la cedula en el arreglo
-  let existe = false;
-  for (let i = 0; i < array.length; i++) {
-    if (cedula === array[i]) {
-      existe = true;
-      break;
-    }
-  }
-  return existe;
-}
+// class SistemaPersona {
+//   constructor() {
+//     this.personas = [];
+//   }
+//   agregarPersona(objPersona) {
+//     this.personas.push(objPersona); //Un método que agrega una persona
+//   }
 
-function eliminarPersonaDelArray(cedula) {
-  //elimina una cedula del arreglo personas sin validar
-  let cedulaNumber = Number(cedula);
-  for (let i = 0; i < personasSinValidar.length; i++) {
-    if (personasSinValidar[i] === cedulaNumber) {
-      personasSinValidar.splice(i, 1);
-      break;
-    }
-  }
-}
+//   contadorOcupacion(departamento, ocupacion) {
+//     let contador = 0;
+//     for (let i = 0; i < this.personas.length; i++) {
+//       //recorre el arreglo personas
+//       const objPersona = this.personas[i];
+//       if (
+//         departamento === objPersona.departamento && //evalua si el departamento ingresado coincide con un departamento en el arreglo departamento
+//         objPersona.ocupacion === ocupacion //a la vez, evalua si la ocupacion ingresada coincide con la ocupacion de esa persona
+//       ) {
+//         contador++; //en caso de coincidir, el contador suma 1
+//       }
+//     }
+//     return contador; //retorna una cantidad
+//   }
+
+//   porcentajeDepartamento(departamento) {
+//     //metodo que retorna el porcentaje de personas por departamento
+//     let contador = 0;
+//     for (let i = 0; i < this.personas.length; i++) {
+//       const objPersona = this.personas[i];
+//       if (departamento === objPersona.departamento) {
+//         contador++;
+//       }
+//     }
+
+//     let porcentaje = Math.round((contador * 100) / this.personas.length);
+//     return porcentaje;
+//   }
+
+//   contadorPendientesAValidar() {
+//     //retorna el porcentaje de personas por departamento
+//     let contador = 0;
+//     for (let i = 0; i < this.personas.length; i++) {
+//       const objPersona = this.personas[i];
+//       if (objPersona.validado === false) {
+//         contador++;
+//       }
+//     }
+//     let porcentaje = Math.round((contador * 100) / this.personas.length);
+
+//     return porcentaje;
+//   }
+
+//   contadorEdadDepartamento(departamento, minimo, maximo) {
+//     //retorna el porcentaje de edad por departamento
+//     let contador = 0;
+//     let contadorTotal = 0;
+//     for (let a = 0; a < this.personas.length; a++) {
+//       const objContar = this.personas[a];
+//       if (objContar.departamento === departamento) {
+//         contadorTotal++;
+//       }
+//     }
+
+//     for (let i = 0; i < this.personas.length; i++) {
+//       const objPersona = this.personas[i];
+//       if (
+//         departamento === objPersona.departamento &&
+//         objPersona.edad < maximo &&
+//         objPersona.edad >= minimo
+//       ) {
+//         contador++;
+//       }
+//     }
+
+//     let porcentaje = Math.round((contador * 100) / contadorTotal);
+//     return porcentaje;
+//   }
+
+//   contadorPersonasDepartamento(departamento) {
+//     //retorna la cantidad de personas por departamento
+//     let contador = 0;
+//     for (let i = 0; i < this.personas.length; i++) {
+//       const objPersona = this.personas[i];
+//       if (objPersona.departamento === departamento) {
+//         contador++;
+//       }
+//     }
+//     return contador;
+//   }
+
+//   modificarPersona(cedula, nombre, apellido, edad, departamento, ocupacion) {
+//     //modifica una persona
+//     for (let i = 0; i < this.personas.length; i++) {
+//       const unaPersona = this.personas[i];
+
+//       if (cedula === unaPersona.cedula) {
+//         unaPersona.nombre = nombre;
+//         unaPersona.apellido = apellido;
+//         unaPersona.edad = edad;
+//         unaPersona.departamento = departamento;
+//         unaPersona.ocupacion = ocupacion;
+
+//         break;
+//       }
+//     }
+//   }
+
+//   nombreYApellido(cedula) {
+//     // dada una cedula, devuelve el nombre y el apellido de la persona
+//     let nombre;
+//     for (let i = 0; i < this.personas.length; i++) {
+//       const objPersona = this.personas[i];
+//       if (objPersona.cedula === cedula) {
+//         nombre = objPersona.nombre + " " + objPersona.apellido;
+//         break;
+//       }
+//     }
+
+//     return nombre;
+//   }
+// }
+
+// let sistemaPersona = new SistemaPersona();
+
+// let personasSinValidar = [];
+// agregarArregloPersonasSinValidar();
+// agregarSinValidarACensistas();
+
+// function agregarSinValidarACensistas() {
+//   //asigna personas sin validar a censista
+//   for (let a = 0; a < personasSinValidar.length; a++) {
+//     sistema.asignarACensista(personasSinValidar[a]);
+//   }
+// }
+
+// function agregarArregloPersonasSinValidar() {
+//   //agrega personas sin validar al arreglo personas sin validar
+//   for (let i = 0; i < sistemaPersona.personas.length; i++) {
+//     const objPersona = sistemaPersona.personas[i];
+//     if (objPersona.validado === false) {
+//       if (!verificarArray(personasSinValidar, objPersona.cedula)) {
+//         personasSinValidar.push(objPersona.cedula);
+//       }
+//     }
+//   }
+// }
+
+// function verificarArray(array, cedula) {
+//   //verifica si existe la cedula en el arreglo
+//   let existe = false;
+//   for (let i = 0; i < array.length; i++) {
+//     if (cedula === array[i]) {
+//       existe = true;
+//       break;
+//     }
+//   }
+//   return existe;
+// }
+
+// function eliminarPersonaDelArray(cedula) {
+//   //elimina una cedula del arreglo personas sin validar
+//   let cedulaNumber = Number(cedula);
+//   for (let i = 0; i < personasSinValidar.length; i++) {
+//     if (personasSinValidar[i] === cedulaNumber) {
+//       personasSinValidar.splice(i, 1);
+//       break;
+//     }
+//   }
+// }
