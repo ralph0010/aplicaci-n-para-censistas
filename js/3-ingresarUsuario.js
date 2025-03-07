@@ -5,6 +5,7 @@ document.querySelector("#btnLoguear").addEventListener("click", loguearUsuario)
 let usuariologin = "";
 
 
+
 function loguearUsuario(){
    let mensaje = document.querySelector("#pMensajeDeLogueo");
    try{
@@ -26,8 +27,5 @@ function loguearUsuario(){
 }
 
 
-document.querySelector("#aRegistrarUsuario").addEventListener("click", irARegistrarUsuario); 
-function irARegistrarUsuario(){ //cambia de seccion 
-   cambiarSeccion("seccionRegistrarCensista")
-}
+
 

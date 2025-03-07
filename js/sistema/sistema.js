@@ -49,7 +49,7 @@ class Sistema {
   }
 
   registrarCensista(nombre, apellido, usuario, password){
-    nuevoCensista = new Censista(nombre, apellido, usuario, password);
+    let nuevoCensista = new Censista(nombre, apellido, usuario, password);
     if(this.existeCensista(usuario)) throw new Error("El nombre de usuario ya existe en el sistema");
     this.censistas.push(nuevoCensista);  
   }

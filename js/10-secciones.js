@@ -4,6 +4,8 @@ for (let i = 0; i < botones.length; i++) {
   const boton = botones[i]; //Creamos otra variable que se modificará según la repetitiva, y va contener el array de botones en lista
   boton.addEventListener("click", mostrarSeccion); // Para cada boton hacemos un llamado en el cual ejecutará la función de mostrarSeccion
 }
+document.querySelector("#aRegistrarUsuario").addEventListener("click", ()=>{
+  cambiarSeccion("seccionRegistrarCensista")}); 
 
 ocultarMenus("secundario");
 ocultarSecciones();
@@ -88,3 +90,4 @@ function ocultarSeccionDeterminada(id){
 function mostrarSeccionDeterminada(id){
   document.querySelector("#"+id).style.display = "block"
 }
+

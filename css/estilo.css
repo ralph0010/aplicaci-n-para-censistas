@@ -221,6 +221,6 @@ input[type="button"]:disabled {
 #aRegistrarUsuario:hover{
   background-color: #48B9A9;
 }
-.btn:hover{
+.btn:hover, .btnClic:hover {
   cursor: pointer;
 }
