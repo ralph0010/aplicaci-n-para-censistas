@@ -1,5 +1,6 @@
-import { Departamento, departamentos } from "./Departamento.js";
+import { obtenerDepartamentoPorNombre } from "./Departamento.js";
 import { biblioteca } from "./biblioteca.js";
+import { obtenerOcupacionPorNombre } from "./Ocupacion.js";
 export class Persona {
   constructor(
     nombre,
@@ -17,12 +18,7 @@ export class Persona {
     this.departamento = departamento;
     this.ocupacion = ocupacion;
     this.validado = validado;
-    this.validarPersonas(
-      nombre,
-      apellido,
-      edad,
-      cedula
-    );
+    this.validarPersonas(nombre, apellido, edad, cedula);
   }
   validarPersonas(nombre, apellido, edad, cedula) {
     if (!biblioteca.stringValidator(nombre))
@@ -53,7 +49,7 @@ export class Persona {
     if (!cedulaEsValida(cedula))
       throw new Error("La cédula ingresada no es válidad");
   }
-  
+
   #validarCantidadDigitosCedulas(cedula) {
     if (cedula.length < 7 || cedula.length > 8)
       throw new Error("Error, la cédula debe contener entre 7 y 8 dígitos");
@@ -71,6 +67,9 @@ export class Persona {
     }
     return cedulaReescrita; //Retornamos los caracteres de los números al final
   }
+  agregarPersonaADepartamento() {
+    this.departamento.agregarPersonaCensada(this.ocupacion.tipo);
+  }
 }
 
 // console.log(generarIdsValidos());
@@ -78,19 +77,21 @@ export class Persona {
 function generarCedulasAleatorias() {
   let idsValidos = [];
   while (idsValidos.length < 30) {
-      // Generar un ID de 8 dígitos al azar
-      let id = Array.from({ length: 8 }, () => Math.floor(Math.random() * 10)).join("");
+    // Generar un ID de 8 dígitos al azar
+    let id = Array.from({ length: 8 }, () =>
+      Math.floor(Math.random() * 10)
+    ).join("");
 
-      // Validar el ID
-      if (cedulaEsValida(id)) {
-          idsValidos.push(id); // Añadimos el ID si es válido
-      }
+    // Validar el ID
+    if (cedulaEsValida(id)) {
+      idsValidos.push(id); // Añadimos el ID si es válido
+    }
   }
   return idsValidos;
 }
 
 function cedulaEsValida(cedula) {
-  let replicarCedula = ""+cedula; // Asignamos a una variable la cedula para poder modificarla después.
+  let replicarCedula = "" + cedula; // Asignamos a una variable la cedula para poder modificarla después.
   let multiplicador = "2987634"; // Variable que utilizaremos para comprobar si la cédula es válida
   let resultado = 0; //Variable que sumaremos más adelante en la repetitiva
   let digitoVerificador = replicarCedula.charAt(replicarCedula.length - 1); //El valor del ultimo digito de la cédula
@@ -121,28 +122,44 @@ export const juegoPruebasPersonas = [
     "Martinez",
     46,
     73958145,
-    "Durazno",
-    "Dependiente",
+    obtenerDepartamentoPorNombre("Durazno"),
+    obtenerOcupacionPorNombre("Dependiente"),
     true
   ),
-  new Persona("Ana", "González", 27, 88464123, "Canelones", "Estudiante", true),
+  new Persona(
+    "Ana",
+    "González",
+    27,
+    88464123,
+    obtenerDepartamentoPorNombre("Canelones"),
+    obtenerOcupacionPorNombre("Estudiante"),
+    true
+  ),
   new Persona(
     "Luis",
     "Rodríguez",
     55,
     64517423,
-    "Maldonado",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Maldonado"),
+    obtenerOcupacionPorNombre("Independiente"),
     true
   ),
-  new Persona("María", "García", 67, 23810359, "Salto", "No Trabaja", true),
+  new Persona(
+    "María",
+    "García",
+    67,
+    23810359,
+    obtenerDepartamentoPorNombre("Salto"),
+    obtenerOcupacionPorNombre("No Trabaja"),
+    true
+  ),
   new Persona(
     "Pablo",
     "Martínez",
     34,
     66417768,
-    "Paysandú",
-    "Dependiente",
+    obtenerDepartamentoPorNombre("Paysandú"),
+    obtenerOcupacionPorNombre("Dependiente"),
     true
   ),
   new Persona(
@@ -150,28 +167,44 @@ export const juegoPruebasPersonas = [
     "Fernández",
     48,
     99991351,
-    "Rivera",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Rivera"),
+    obtenerOcupacionPorNombre("Independiente"),
     true
   ),
-  new Persona("Diego", "López", 31, 72352370, "Tacuarembó", "Estudiante", true),
+  new Persona(
+    "Diego",
+    "López",
+    31,
+    72352370,
+    obtenerDepartamentoPorNombre("Tacuarembó"),
+    obtenerOcupacionPorNombre("Estudiante"),
+    true
+  ),
   new Persona(
     "Teresa",
     "Sánchez",
     25,
     33299822,
-    "Cerro Largo",
-    "Dependiente",
+    obtenerDepartamentoPorNombre("Cerro Largo"),
+    obtenerOcupacionPorNombre("Dependiente"),
     true
   ),
-  new Persona("Sergio", "Silva", 52, 60988858, "Rocha", "Independiente", true),
+  new Persona(
+    "Sergio",
+    "Silva",
+    52,
+    60988858,
+    obtenerDepartamentoPorNombre("Rocha"),
+    obtenerOcupacionPorNombre("Independiente"),
+    true
+  ),
   new Persona(
     "Beatriz",
     "Ramírez",
     44,
     31325994,
-    "Treinta y Tres",
-    "No Trabaja",
+    obtenerDepartamentoPorNombre("Treinta y Tres"),
+    obtenerOcupacionPorNombre("No Trabaja"),
     true
   ),
   new Persona(
@@ -179,8 +212,8 @@ export const juegoPruebasPersonas = [
     "Mendoza",
     30,
     13580691,
-    "Durazno",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Durazno"),
+    obtenerOcupacionPorNombre("Independiente"),
     true
   ),
   new Persona(
@@ -188,8 +221,8 @@ export const juegoPruebasPersonas = [
     "Gutierrez",
     29,
     67276662,
-    "Artigas",
-    "Estudiante",
+    obtenerDepartamentoPorNombre("Artigas"),
+    obtenerOcupacionPorNombre("Estudiante"),
     true
   ),
   new Persona(
@@ -197,8 +230,8 @@ export const juegoPruebasPersonas = [
     "Torres",
     60,
     57898701,
-    "San José",
-    "Independiente",
+    obtenerDepartamentoPorNombre("San José"),
+    obtenerOcupacionPorNombre("Independiente"),
     true
   ),
   new Persona(
@@ -206,8 +239,8 @@ export const juegoPruebasPersonas = [
     "Peralta",
     21,
     10150942,
-    "Colonia",
-    "No Trabaja",
+    obtenerDepartamentoPorNombre("Colonia"),
+    obtenerOcupacionPorNombre("No Trabaja"),
     true
   ),
   new Persona(
@@ -215,8 +248,8 @@ export const juegoPruebasPersonas = [
     "Vargas",
     73,
     20660454,
-    "Soriano",
-    "Dependiente",
+    obtenerDepartamentoPorNombre("Soriano"),
+    obtenerOcupacionPorNombre("Dependiente"),
     true
   ),
   new Persona(
@@ -224,8 +257,8 @@ export const juegoPruebasPersonas = [
     "Aguilar",
     45,
     14460296,
-    "Río Negro",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Río Negro"),
+    obtenerOcupacionPorNombre("Independiente"),
     false
   ),
   new Persona(
@@ -233,8 +266,8 @@ export const juegoPruebasPersonas = [
     "Cordero",
     33,
     12679009,
-    "Lavalleja",
-    "Estudiante",
+    obtenerDepartamentoPorNombre("Lavalleja"),
+    obtenerOcupacionPorNombre("Estudiante"),
     false
   ),
   new Persona(
@@ -242,19 +275,35 @@ export const juegoPruebasPersonas = [
     "Castillo",
     64,
     10688147,
-    "Florida",
-    "No Trabaja",
+    obtenerDepartamentoPorNombre("Florida"),
+    obtenerOcupacionPorNombre("No Trabaja"),
     false
   ),
-  new Persona("Manuel", "Pinto", 50, 74469212, "Flores", "Dependiente", false),
-  new Persona("Lucía", "Penha", 37, 44677853, "Rocha", "Estudiante", false),
+  new Persona(
+    "Manuel",
+    "Pinto",
+    50,
+    74469212,
+    obtenerDepartamentoPorNombre("Flores"),
+    obtenerOcupacionPorNombre("Dependiente"),
+    false
+  ),
+  new Persona(
+    "Lucía",
+    "Penha",
+    37,
+    44677853,
+    obtenerDepartamentoPorNombre("Rocha"),
+    obtenerOcupacionPorNombre("Estudiante"),
+    false
+  ),
   new Persona(
     "Guillermo",
     "Navarro",
     28,
     19840011,
-    "Treinta y Tres",
-    "Dependiente",
+    obtenerDepartamentoPorNombre("Treinta y Tres"),
+    obtenerOcupacionPorNombre("Dependiente"),
     false
   ),
   new Persona(
@@ -262,18 +311,26 @@ export const juegoPruebasPersonas = [
     "Lugo",
     22,
     70994552,
-    "Canelones",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Canelones"),
+    obtenerOcupacionPorNombre("Independiente"),
     false
   ),
-  new Persona("Rafael", "Ríos", 40, 67647364, "Maldonado", "No Trabaja", false),
+  new Persona(
+    "Rafael",
+    "Ríos",
+    40,
+    67647364,
+    obtenerDepartamentoPorNombre("Maldonado"),
+    obtenerOcupacionPorNombre("No Trabaja"),
+    false
+  ),
   new Persona(
     "Estela",
     "Palma",
     71,
     20900292,
-    "Montevideo",
-    "Estudiante",
+    obtenerDepartamentoPorNombre("Montevideo"),
+    obtenerOcupacionPorNombre("Estudiante"),
     false
   ),
   new Persona(
@@ -281,8 +338,8 @@ export const juegoPruebasPersonas = [
     "Vallejo",
     46,
     98665367,
-    "Durazno",
-    "Dependiente",
+    obtenerDepartamentoPorNombre("Durazno"),
+    obtenerOcupacionPorNombre("Dependiente"),
     false
   ),
   new Persona(
@@ -290,8 +347,8 @@ export const juegoPruebasPersonas = [
     "Quintero",
     35,
     77050553,
-    "Tacuarembó",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Tacuarembó"),
+    obtenerOcupacionPorNombre("Independiente"),
     false
   ),
   new Persona(
@@ -299,19 +356,35 @@ export const juegoPruebasPersonas = [
     "Zúnhiga",
     64,
     23813715,
-    "Paysandú",
-    "No Trabaja",
+    obtenerDepartamentoPorNombre("Paysandú"),
+    obtenerOcupacionPorNombre("No Trabaja"),
     false
   ),
-  new Persona("Isabel", "Vega", 23, 47190741, "Rivera", "Estudiante", false),
-  new Persona("Carlos", "Yánhez", 39, 87559347, "Salto", "Dependiente", false),
+  new Persona(
+    "Isabel",
+    "Vega",
+    23,
+    47190741,
+    obtenerDepartamentoPorNombre("Rivera"),
+    obtenerOcupacionPorNombre("Estudiante"),
+    false
+  ),
+  new Persona(
+    "Carlos",
+    "Yánhez",
+    39,
+    87559347,
+    obtenerDepartamentoPorNombre("Salto"),
+    obtenerOcupacionPorNombre("Dependiente"),
+    false
+  ),
   new Persona(
     "Graciela",
     "Ximénez",
     28,
     70626672,
-    "Artigas",
-    "Independiente",
+    obtenerDepartamentoPorNombre("Artigas"),
+    obtenerOcupacionPorNombre("Independiente"),
     false
   ),
 ];
