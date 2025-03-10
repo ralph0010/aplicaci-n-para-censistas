@@ -1,3 +1,4 @@
+import { biblioteca } from "../biblioteca.js";
 import { Censista, juegoDePruebaCensistas } from "../Censista.js";
 import {
   Departamento,
@@ -9,7 +10,12 @@ import {
   ocupaciones,
   retornarOcupacionPorTipo,
 } from "../Ocupacion.js";
-import { Persona, juegoPruebasPersonas } from "../Persona.js"; //juegoPruebasPersonas
+import {
+  Persona,
+  cedulaEsValida,
+  juegoPruebasPersonas,
+  reEscribirCedula,
+} from "../Persona.js"; //juegoPruebasPersonas
 class Sistema {
   constructor() {
     this.censistas = [];
@@ -17,7 +23,7 @@ class Sistema {
     this.personas = [];
     this.ocupaciones = [];
     this.agregarArraysAlInicio();
-    console.log(this.censistas)
+    console.log(this.censistas);
     console.log(departamentos);
   }
   //agregar todos los datos del sistema al inicio
@@ -34,10 +40,10 @@ class Sistema {
   }
 
   //Lo creo para que cada dato creado con IA de personas puedan ser destinados a censistas en caso que no esten validados
-  agregarPersonasAPersonasArray(){
-    juegoPruebasPersonas.forEach((persona)=>{
+  agregarPersonasAPersonasArray() {
+    juegoPruebasPersonas.forEach((persona) => {
       this.personas.push(persona);
-      if(!persona.validado) this.asignarACensista(persona);
+      if (!persona.validado) this.asignarACensista(persona);
       persona.agregarPersonaADepartamento();
     });
   }
@@ -50,26 +56,28 @@ class Sistema {
     let retorno = this.censistas.find(
       (censista) =>
         censista.usuario.toLowerCase() === nombreUsuario.toLowerCase() &&
-      censista.password === passUsuario
+        censista.password === passUsuario
     );
     if (retorno == undefined || retorno == "")
       throw new Error("Error, usuario y/o contraseña incorrectos");
     return retorno;
   }
-  
-  registrarCensista(nombre, apellido, usuario, password){
+
+  registrarCensista(nombre, apellido, usuario, password) {
     let nuevoCensista = new Censista(nombre, apellido, usuario, password);
-    if(this.existeCensista(usuario)) throw new Error("El nombre de usuario ya existe en el sistema");
-    this.censistas.push(nuevoCensista);  
+    if (this.existeCensista(usuario))
+      throw new Error("El nombre de usuario ya existe en el sistema");
+    this.censistas.push(nuevoCensista);
   }
   asignarACensista(persona) {
     //metodo que asigna una persona a un censista aleatorio
     let maximo = this.censistas.length; //define un maximo que es el maximo de censistas
-    
+
     let numero = Math.floor(Math.random() * maximo); //define un numero que se redondea hacia abajo
     //el numero es un numero aleatorio entre 0 y 1 multiplicado por el maximo
     this.censistas[numero].personasACargo.push(persona); //hace un push al arreglo de censista.personasACargo de la cedula de la persona asignada
   }
+  //Se agrega los datos de una persona, se utiliza para los dos tipos de usuario (invitado y censista)
   agregarPersona(
     nombre,
     apellido,
@@ -94,24 +102,75 @@ class Sistema {
       throw new Error("La cédula ya se encuentra registrada en el sistema");
     this.agregarObjeto(nuevaPersona, this.personas);
     if (!validado) {
-      this.asignarACensista(nuevaPersona);}
+      this.asignarACensista(nuevaPersona);
+    }
     nuevaPersona.agregarPersonaADepartamento();
   }
+  //Metodo que retorna si la persona existe
   existePersona(cedulaPersona) {
     let retorno = this.personas.some(
       (persona) => persona.cedula === cedulaPersona
     );
     return retorno;
   }
+  //Metodo que retorna si existe el censista.
   existeCensista(userCensista) {
     let retorno = this.censistas.some(
       (censista) =>
         censista.usuario.toLowerCase() === userCensista.toLowerCase()
     );
-    
+
     return retorno;
   }
-  
+  //Se elimina una persona del precenso
+  eliminarPersonaDelSistema(cedula) {
+    cedula = biblioteca.verficarCampoNoVacio(cedula, "La cédula");
+    cedula = reEscribirCedula(cedula);
+
+    let posicion = this.obtenerPosicionPersona(cedula);
+    this.validarExistePersona(cedula, posicion);
+
+    let persona = this.personas[posicion];
+    if (persona.validado) {
+      throw new Error(
+        "La persona ya ha sido validada, no se puede eliminar los datos"
+      );
+    } else {
+      let confirmacion = confirm(
+        `¿Está segura/o que desea eliminar a ${persona.nombre} ${persona.apellido} del censo`
+      );
+      if (confirmacion) {
+        this.personas.splice(posicion, 1);
+      }
+      return confirmacion;
+    }
+  }
+  validarExistePersona(cedula, posicion) {
+    if (!cedulaEsValida(cedula))
+      throw new Error(
+        "La cédula ingresada es errónea, verifique nuevamente su número de CI"
+      );
+
+    if (posicion === -1) {
+      throw new Error(
+        "La cédula ingresada no se encuentra registrada en el sistema"
+      );
+    }
+  }
+  obtenerPosicionPersona(cedula) {
+    return this.personas.findIndex(
+      (persona) => Number(persona.cedula) === Number(cedula)
+    );
+    // return posicion;
+  }
+  obtenerPersonaPorCI(cedula) {
+    let persona = this.personas.find((persona) => {
+      Number(persona.cedula) === Number(cedula);
+    });
+    return persona;
+  }
+
+  //--------------------------------------Antiguo y corregir TO DO
   mostrarCensistaAsignado(cedula) {
     //metodo que retorna el nombre del censista asignado
     let nombre;
@@ -128,31 +187,31 @@ class Sistema {
         }
       }
     }
-    
+
     return nombre; //retorna el nombre del censista asignado
   }
-  
+
   eliminarUnaPersonaACargo(cedula) {
     //metodo que elimina una persona(cedula) que tiene un censista a cargo
-    
+
     for (let i = 0; i < this.censistas.length; i++) {
       //recorre el arreglo censista
       const personasACargo = this.censistas[i].personasACargo;
-      
+
       for (let a = 0; a < personasACargo.length; a++) {
         //recorre el arreglo de personas a cargo
         const unaCedula = personasACargo[a];
-        
+
         if (cedula === unaCedula) {
           //evalua si la cedula de la persona coincide con la cedula a cargo
-          
+
           personasACargo.splice(a, 1); //elimina la cedula a cargo del censista
           break;
         }
       }
     }
   }
-  
+
   escribirNombreYApellido(usuario) {
     //metodo que retorna el nombre y el apellido de un censista
     let nombre;
@@ -171,4 +230,4 @@ class Sistema {
 
 export let sistemaCenso = new Sistema(); // le damos la funcionalidad al sistema
 
-console.log(sistemaCenso.personas)
+console.log(sistemaCenso.personas);

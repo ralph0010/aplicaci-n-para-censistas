@@ -14,10 +14,5 @@ function mostrarLista(){ //despliega automaticamente la lista de las estadistica
         </tr>`
     })
     document.querySelector("#tblListaCensados").innerHTML = listado;
-    // for (let i = 0; i <sistemaCenso.departamentos.length; i++){
-    //     const objDepartamento = sistemaDepartamento.departamentos[i];
-    //     const sumaDepenEIndepen = sistemaPersona.contadorOcupacion(objDepartamento.nombre, "Dependiente") + sistemaPersona.contadorOcupacion(objDepartamento.nombre, "Independiente");  
-    //     document.querySelector("#tblListaCensados").innerHTML += 
-    // }
 }
 mostrarLista();

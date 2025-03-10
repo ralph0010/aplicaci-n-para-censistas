@@ -14,7 +14,7 @@ export class Persona {
     this.nombre = nombre;
     this.apellido = apellido;
     this.edad = edad;
-    this.cedula = this.#reEscribirCedula(cedula);
+    this.cedula = reEscribirCedula(cedula);
     this.departamento = departamento;
     this.ocupacion = ocupacion;
     this.validado = validado;
@@ -55,23 +55,23 @@ export class Persona {
       throw new Error("Error, la cédula debe contener entre 7 y 8 dígitos");
   }
 
-  #reEscribirCedula(cedula) {
-    //Nos va servir para reescribir la cedula
-    let cedulaReescrita = ""; //Variable con un valor nulo
-    for (let i = 0; i < cedula.length; i++) {
-      //Recorremos el array del parametro
-      if (cedula.charCodeAt(i) >= 48 && cedula.charCodeAt(i) <= 57) {
-        //Preguntamos si en la posicion de "i" se encuentra dentro del codigo ASCII
-        cedulaReescrita += cedula.charAt(i); // En caso afirmativo lo agregamos a la variable
-      }
-    }
-    return cedulaReescrita; //Retornamos los caracteres de los números al final
-  }
   agregarPersonaADepartamento() {
     this.departamento.agregarPersonaCensada(this.ocupacion.tipo);
   }
 }
 
+export function reEscribirCedula(cedula) {
+  //Nos va servir para reescribir la cedula
+  let cedulaReescrita = ""; //Variable con un valor nulo
+  for (let i = 0; i < cedula.length; i++) {
+    //Recorremos el array del parametro
+    if (cedula.charCodeAt(i) >= 48 && cedula.charCodeAt(i) <= 57) {
+      //Preguntamos si en la posicion de "i" se encuentra dentro del codigo ASCII
+      cedulaReescrita += cedula.charAt(i); // En caso afirmativo lo agregamos a la variable
+    }
+  }
+  return cedulaReescrita; //Retornamos los caracteres de los números al final
+}
 // console.log(generarIdsValidos());
 
 function generarCedulasAleatorias() {
@@ -90,7 +90,7 @@ function generarCedulasAleatorias() {
   return idsValidos;
 }
 
-function cedulaEsValida(cedula) {
+export function cedulaEsValida(cedula) {
   let replicarCedula = "" + cedula; // Asignamos a una variable la cedula para poder modificarla después.
   let multiplicador = "2987634"; // Variable que utilizaremos para comprobar si la cédula es válida
   let resultado = 0; //Variable que sumaremos más adelante en la repetitiva
@@ -121,7 +121,7 @@ export const juegoPruebasPersonas = [
     "Nicolás",
     "Martinez",
     46,
-    73958145,
+    "73958145",
     obtenerDepartamentoPorNombre("Durazno"),
     obtenerOcupacionPorNombre("Dependiente"),
     true
@@ -130,7 +130,7 @@ export const juegoPruebasPersonas = [
     "Ana",
     "González",
     27,
-    88464123,
+    "88464123",
     obtenerDepartamentoPorNombre("Canelones"),
     obtenerOcupacionPorNombre("Estudiante"),
     true
@@ -139,7 +139,7 @@ export const juegoPruebasPersonas = [
     "Luis",
     "Rodríguez",
     55,
-    64517423,
+    "64517423",
     obtenerDepartamentoPorNombre("Maldonado"),
     obtenerOcupacionPorNombre("Independiente"),
     true
@@ -148,7 +148,7 @@ export const juegoPruebasPersonas = [
     "María",
     "García",
     67,
-    23810359,
+    "23810359",
     obtenerDepartamentoPorNombre("Salto"),
     obtenerOcupacionPorNombre("No Trabaja"),
     true
@@ -157,7 +157,7 @@ export const juegoPruebasPersonas = [
     "Pablo",
     "Martínez",
     34,
-    66417768,
+    "66417768",
     obtenerDepartamentoPorNombre("Paysandú"),
     obtenerOcupacionPorNombre("Dependiente"),
     true
@@ -166,7 +166,7 @@ export const juegoPruebasPersonas = [
     "Carmen",
     "Fernández",
     48,
-    99991351,
+    "99991351",
     obtenerDepartamentoPorNombre("Rivera"),
     obtenerOcupacionPorNombre("Independiente"),
     true
@@ -175,7 +175,7 @@ export const juegoPruebasPersonas = [
     "Diego",
     "López",
     31,
-    72352370,
+    "72352370",
     obtenerDepartamentoPorNombre("Tacuarembó"),
     obtenerOcupacionPorNombre("Estudiante"),
     true
@@ -184,7 +184,7 @@ export const juegoPruebasPersonas = [
     "Teresa",
     "Sánchez",
     25,
-    33299822,
+    "33299822",
     obtenerDepartamentoPorNombre("Cerro Largo"),
     obtenerOcupacionPorNombre("Dependiente"),
     true
@@ -193,7 +193,7 @@ export const juegoPruebasPersonas = [
     "Sergio",
     "Silva",
     52,
-    60988858,
+    "60988858",
     obtenerDepartamentoPorNombre("Rocha"),
     obtenerOcupacionPorNombre("Independiente"),
     true
@@ -202,7 +202,7 @@ export const juegoPruebasPersonas = [
     "Beatriz",
     "Ramírez",
     44,
-    31325994,
+    "31325994",
     obtenerDepartamentoPorNombre("Treinta y Tres"),
     obtenerOcupacionPorNombre("No Trabaja"),
     true
@@ -211,7 +211,7 @@ export const juegoPruebasPersonas = [
     "Rodrigo",
     "Mendoza",
     30,
-    13580691,
+    "13580691",
     obtenerDepartamentoPorNombre("Durazno"),
     obtenerOcupacionPorNombre("Independiente"),
     true
@@ -220,7 +220,7 @@ export const juegoPruebasPersonas = [
     "Laura",
     "Gutierrez",
     29,
-    67276662,
+    "67276662",
     obtenerDepartamentoPorNombre("Artigas"),
     obtenerOcupacionPorNombre("Estudiante"),
     true
@@ -229,7 +229,7 @@ export const juegoPruebasPersonas = [
     "Pedro",
     "Torres",
     60,
-    57898701,
+    "57898701",
     obtenerDepartamentoPorNombre("San José"),
     obtenerOcupacionPorNombre("Independiente"),
     true
@@ -238,7 +238,7 @@ export const juegoPruebasPersonas = [
     "Gabriela",
     "Peralta",
     21,
-    10150942,
+    "10150942",
     obtenerDepartamentoPorNombre("Colonia"),
     obtenerOcupacionPorNombre("No Trabaja"),
     true
@@ -247,7 +247,7 @@ export const juegoPruebasPersonas = [
     "Ernesto",
     "Vargas",
     73,
-    20660454,
+    "20660454",
     obtenerDepartamentoPorNombre("Soriano"),
     obtenerOcupacionPorNombre("Dependiente"),
     true
@@ -256,7 +256,7 @@ export const juegoPruebasPersonas = [
     "Inés",
     "Aguilar",
     45,
-    14460296,
+    "14460296",
     obtenerDepartamentoPorNombre("Río Negro"),
     obtenerOcupacionPorNombre("Independiente"),
     false
@@ -265,7 +265,7 @@ export const juegoPruebasPersonas = [
     "Julián",
     "Cordero",
     33,
-    12679009,
+    "12679009",
     obtenerDepartamentoPorNombre("Lavalleja"),
     obtenerOcupacionPorNombre("Estudiante"),
     false
@@ -274,7 +274,7 @@ export const juegoPruebasPersonas = [
     "Sofía",
     "Castillo",
     64,
-    10688147,
+    "10688147",
     obtenerDepartamentoPorNombre("Florida"),
     obtenerOcupacionPorNombre("No Trabaja"),
     false
@@ -283,7 +283,7 @@ export const juegoPruebasPersonas = [
     "Manuel",
     "Pinto",
     50,
-    74469212,
+    "74469212",
     obtenerDepartamentoPorNombre("Flores"),
     obtenerOcupacionPorNombre("Dependiente"),
     false
@@ -292,7 +292,7 @@ export const juegoPruebasPersonas = [
     "Lucía",
     "Penha",
     37,
-    44677853,
+    "44677853",
     obtenerDepartamentoPorNombre("Rocha"),
     obtenerOcupacionPorNombre("Estudiante"),
     false
@@ -301,7 +301,7 @@ export const juegoPruebasPersonas = [
     "Guillermo",
     "Navarro",
     28,
-    19840011,
+    "19840011",
     obtenerDepartamentoPorNombre("Treinta y Tres"),
     obtenerOcupacionPorNombre("Dependiente"),
     false
@@ -310,7 +310,7 @@ export const juegoPruebasPersonas = [
     "Rosa",
     "Lugo",
     22,
-    70994552,
+    "70994552",
     obtenerDepartamentoPorNombre("Canelones"),
     obtenerOcupacionPorNombre("Independiente"),
     false
@@ -319,7 +319,7 @@ export const juegoPruebasPersonas = [
     "Rafael",
     "Ríos",
     40,
-    67647364,
+    "67647364",
     obtenerDepartamentoPorNombre("Maldonado"),
     obtenerOcupacionPorNombre("No Trabaja"),
     false
@@ -328,7 +328,7 @@ export const juegoPruebasPersonas = [
     "Estela",
     "Palma",
     71,
-    20900292,
+    "20900292",
     obtenerDepartamentoPorNombre("Montevideo"),
     obtenerOcupacionPorNombre("Estudiante"),
     false
@@ -337,7 +337,7 @@ export const juegoPruebasPersonas = [
     "Nicolás",
     "Vallejo",
     46,
-    98665367,
+    "98665367",
     obtenerDepartamentoPorNombre("Durazno"),
     obtenerOcupacionPorNombre("Dependiente"),
     false
@@ -346,7 +346,7 @@ export const juegoPruebasPersonas = [
     "Mariana",
     "Quintero",
     35,
-    77050553,
+    "77050553",
     obtenerDepartamentoPorNombre("Tacuarembó"),
     obtenerOcupacionPorNombre("Independiente"),
     false
@@ -355,7 +355,7 @@ export const juegoPruebasPersonas = [
     "Armando",
     "Zúnhiga",
     64,
-    23813715,
+    "23813715",
     obtenerDepartamentoPorNombre("Paysandú"),
     obtenerOcupacionPorNombre("No Trabaja"),
     false
@@ -364,7 +364,7 @@ export const juegoPruebasPersonas = [
     "Isabel",
     "Vega",
     23,
-    47190741,
+    "47190741",
     obtenerDepartamentoPorNombre("Rivera"),
     obtenerOcupacionPorNombre("Estudiante"),
     false
@@ -373,7 +373,7 @@ export const juegoPruebasPersonas = [
     "Carlos",
     "Yánhez",
     39,
-    87559347,
+    "87559347",
     obtenerDepartamentoPorNombre("Salto"),
     obtenerOcupacionPorNombre("Dependiente"),
     false
@@ -382,49 +382,17 @@ export const juegoPruebasPersonas = [
     "Graciela",
     "Ximénez",
     28,
-    70626672,
+    "70626672",
     obtenerDepartamentoPorNombre("Artigas"),
     obtenerOcupacionPorNombre("Independiente"),
     false
   ),
 ];
 
-// class SistemaPersona {
-//   constructor() {
-//     this.personas = [];
-//   }
-//   agregarPersona(objPersona) {
-//     this.personas.push(objPersona); //Un método que agrega una persona
-//   }
 
-//   contadorOcupacion(departamento, ocupacion) {
-//     let contador = 0;
-//     for (let i = 0; i < this.personas.length; i++) {
-//       //recorre el arreglo personas
-//       const objPersona = this.personas[i];
-//       if (
-//         departamento === objPersona.departamento && //evalua si el departamento ingresado coincide con un departamento en el arreglo departamento
-//         objPersona.ocupacion === ocupacion //a la vez, evalua si la ocupacion ingresada coincide con la ocupacion de esa persona
-//       ) {
-//         contador++; //en caso de coincidir, el contador suma 1
-//       }
-//     }
-//     return contador; //retorna una cantidad
-//   }
 
-//   porcentajeDepartamento(departamento) {
-//     //metodo que retorna el porcentaje de personas por departamento
-//     let contador = 0;
-//     for (let i = 0; i < this.personas.length; i++) {
-//       const objPersona = this.personas[i];
-//       if (departamento === objPersona.departamento) {
-//         contador++;
-//       }
-//     }
 
-//     let porcentaje = Math.round((contador * 100) / this.personas.length);
-//     return porcentaje;
-//   }
+
 
 //   contadorPendientesAValidar() {
 //     //retorna el porcentaje de personas por departamento
