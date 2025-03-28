@@ -234,15 +234,20 @@ class Sistema {
     return nombre;
   }
   
+  obtenerPorcentajeMayorOMenorEdad(codDepartamento, sonMayores){
+    let departamento = obtenerDepartamentoPorValor(codDepartamento)
+    let cantidad = this.obtenerCantMayoresOMenoresPorDep(departamento, sonMayores);
+    let totalCensados =departamento.cantidadTotalCensados;
+    return cantidad * 100 / totalCensados;
+  }
   //metodo para obtener cantidad de mayores o menores segun departamento
-  obtenerCantMayoresOMenores(codDepartamento, sonMayores){
-    let dep = obtenerDepartamentoPorValor(codDepartamento);
-    if(sonMayores) return dep.mayoresEdad;
-    return dep.menoresEdad;
+  obtenerCantMayoresOMenoresPorDep(departamento, sonMayores){
+    if(sonMayores) return departamento.mayoresEdad;
+    else return departamento.menoresEdad;
   }
 
 }
 
 export let sistemaCenso = new Sistema(); // le damos la funcionalidad al sistema
 
-console.log(sistemaCenso.personas);
+// console.log(sistemaCenso.personas);

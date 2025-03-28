@@ -291,7 +291,7 @@ export const juegoPruebasPersonas = [
   new Persona(
     "Lucía",
     "Penha",
-    37,
+    14,
     "44677853",
     obtenerDepartamentoPorNombre("Rocha"),
     obtenerOcupacionPorNombre("Estudiante"),
@@ -338,7 +338,7 @@ export const juegoPruebasPersonas = [
     "Vallejo",
     46,
     "98665367",
-    obtenerDepartamentoPorNombre("Durazno"),
+    obtenerDepartamentoPorNombre("Maldonado"),
     obtenerOcupacionPorNombre("Dependiente"),
     false
   ),

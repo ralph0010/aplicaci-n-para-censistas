@@ -16,16 +16,16 @@ function mostrarCensadosporLista(){
     let departamento = document.querySelector("#slcDepartamentoDatosCensista").value;
     mensaje.innerHTML = "";
     try{
-        let menoresEdad = sistemaCenso.obtenerCantMayoresOMenores(departamento, false);
-        let mayoresEdad= sistemaCenso.obtenerCantMayoresOMenores(departamento,true);
+        let menoresEdad = Math.round(sistemaCenso.obtenerPorcentajeMayorOMenorEdad(departamento, false));
+        let mayoresEdad= Math.round(sistemaCenso.obtenerPorcentajeMayorOMenorEdad(departamento,true));
         mensaje.innerHTML+=`<table><thead>
         <tr><th>Mayores de Edad</th>
         <th>Menores de Edad</th></tr>
         </thead>
         <tbody>
         <tr>
-        <td>${mayoresEdad}</td>
-        <td>${menoresEdad}</td>
+        <td>${mayoresEdad}%</td>
+        <td>${menoresEdad}%</td>
         </tr></tbody></table>`
         
     }catch (error){
