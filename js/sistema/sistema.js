@@ -157,18 +157,25 @@ class Sistema {
       );
     }
   }
+
+  //retorna la posicion de la persona dentro del array personas.
   obtenerPosicionPersona(cedula) {
     return this.personas.findIndex(
       (persona) => Number(persona.cedula) === Number(cedula)
     );
-    // return posicion;
   }
+  //retorna el objeto persona del array por su cedula
   obtenerPersonaPorCI(cedula) {
     let persona = this.personas.find((persona) => {
       Number(persona.cedula) === Number(cedula);
     });
     return persona;
   }
+  //retorna la persona haciendo las validaciones correspondientes
+  retornarPersonaConValidacion(cedula){
+    
+  }
+  //Modifica los datos del censo, teniendo en cuenta que es un invitado
 
   //--------------------------------------Antiguo y corregir TO DO
   mostrarCensistaAsignado(cedula) {
@@ -226,6 +233,14 @@ class Sistema {
     }
     return nombre;
   }
+  
+  //metodo para obtener cantidad de mayores o menores segun departamento
+  obtenerCantMayoresOMenores(codDepartamento, sonMayores){
+    let dep = obtenerDepartamentoPorValor(codDepartamento);
+    if(sonMayores) return dep.mayoresEdad;
+    return dep.menoresEdad;
+  }
+
 }
 
 export let sistemaCenso = new Sistema(); // le damos la funcionalidad al sistema

@@ -56,7 +56,7 @@ export class Persona {
   }
 
   agregarPersonaADepartamento() {
-    this.departamento.agregarPersonaCensada(this.ocupacion.tipo);
+    this.departamento.agregarPersonaCensada(this.ocupacion.tipo, this.edad);
   }
 }
 
@@ -138,7 +138,7 @@ export const juegoPruebasPersonas = [
   new Persona(
     "Luis",
     "Rodríguez",
-    55,
+    11,
     "64517423",
     obtenerDepartamentoPorNombre("Maldonado"),
     obtenerOcupacionPorNombre("Independiente"),
@@ -147,7 +147,7 @@ export const juegoPruebasPersonas = [
   new Persona(
     "María",
     "García",
-    67,
+    17,
     "23810359",
     obtenerDepartamentoPorNombre("Salto"),
     obtenerOcupacionPorNombre("No Trabaja"),

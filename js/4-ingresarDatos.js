@@ -8,11 +8,6 @@ document
 document
   .querySelector("#btnEnviarDatosPersonas")
   .addEventListener("click", ingresarPersonaCensista);
-  biblioteca.agregarDepartamentos("slcDepartamentoInvitadoIngresar"); //Funcion en la biblioteca
-  biblioteca.agregarOcupacion("slcOcupacionInvitado"); //Funcion en la biblioteca
-  biblioteca.agregarDepartamentos("slcDepartamentoDatos"); //Funcion en la biblioteca
-  biblioteca.agregarOcupacion("slcOcupacionDatos"); //Funcion en la biblioteca
-  
 //retorna un string con un mensaje
 function mensajeAgregadoCensista(nombre, apellido) {
   return `Se ha agregado correctamente a ${nombre} ${apellido} al sistema`;

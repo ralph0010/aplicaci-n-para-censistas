@@ -133,7 +133,12 @@
             />
             <br /><br />
 
-            <input type="button" id="btnRegistrarCensista" value="Registrar" class="btnClic"  />
+            <input
+              type="button"
+              id="btnRegistrarCensista"
+              value="Registrar"
+              class="btnClic"
+            />
             <p id="pResultadoCensista"></p>
           </div>
           <!-- ---------------------Fin función registrarUsuario ---------------------------------- -->
@@ -147,10 +152,17 @@
             ><br />
             <input type="password" id="txtContraseñaRegistrada" /><br />
             <br />
-            <input type="button" id="btnLoguear" value="Ingresar Usuario" class="btnClic" />
+            <input
+              type="button"
+              id="btnLoguear"
+              value="Ingresar Usuario"
+              class="btnClic"
+            />
             <br />
             <p id="pMensajeDeLogueo"></p>
-            <button id="aRegistrarUsuario" class="link btnClic">Registrar usuario</button>
+            <button id="aRegistrarUsuario" class="link btnClic">
+              Registrar usuario
+            </button>
             <!---------------------Fin funcion ingresoUsuario----------------->
           </div>
 
@@ -189,7 +201,7 @@
             ><br />
             <select
               id="slcDepartamentoDatos"
-              class="slcRegistrarPersonaCensista"
+              class="slcRegistrarPersonaCensista cargarDepartamentos"
             ></select
             ><br />
 
@@ -197,7 +209,7 @@
             ><br />
             <select
               id="slcOcupacionDatos"
-              class="slcRegistrarPersonaCensista"
+              class="slcRegistrarPersonaCensista agregarOcupaciones"
             ></select>
             <br />
             <br />
@@ -259,32 +271,38 @@
           <!--      Fin seccion Reasignar para Validar -->
 
           <div id="seccionVisualizarEstadistica" class="seccion">
-            <h3>Visualizar información estadística</h3>
-            <p id="pMensajeTotalCensados"></p>
-            <p id="pMensajePendientesValidar"></p>
-            <br />
-            <label for="slcDepartamentoDatosCensista"
-              >Seleccione un departamento para ver la cantidad de censados:
-            </label>
-            <select id="slcDepartamentoDatosCensista"></select
-            ><br />
+            <section class="estadisticas">
+              <h3>Visualizar información estadística</h3>
+              <p id="pMensajeTotalCensados"></p>
+              <p id="pMensajePendientesValidar"></p>
+              <br />
+              <label for="slcDepartamentoDatosCensista"
+                >Seleccione un departamento para ver la cantidad de censados:
+              </label>
+              <select
+                id="slcDepartamentoDatosCensista"
+                class="cargarDepartamentos"
+              ></select
+              ><br />
 
-            <input
-              type="button"
-              id="btnMostrarCantidadCensados"
-              value="Mostrar Cantidad Censados"
-            />
-            <p id="pMostrarSlcCensados"></p>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Departamento</th>
-                  <th>Total Censados</th>
-                </tr>
-              </thead>
-              <tbody id="tblMostrarDepartamento"></tbody>
-            </table>
+              <input
+                type="button"
+                id="btnMostrarCantidadCensados"
+                value="Mostrar Cantidad Censados"
+              />
+              <div id="pMostrarSlcCensados"></div>
+            </section>
+            <section class="estadisticas">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Departamento</th>
+                    <th>Total Censados</th>
+                  </tr>
+                </thead>
+                <tbody id="tblMostrarDepartamento"></tbody>
+              </table>
+            </section>
           </div>
 
           <!-- Fin seccion visualizar informacion estadistica -->
@@ -341,14 +359,14 @@
               ><br />
               <select
                 id="slcDepartamentoInvitadoIngresar"
-                class="slcRegistroInvitado"
+                class="slcRegistroInvitado cargarDepartamentos"
               ></select
               ><br />
 
               <label for="slcOcupacionInvitado">Seleccione la ocupación:</label>
               <br /><select
                 id="slcOcupacionInvitado"
-                class="slcRegistroInvitado"
+                class="slcRegistroInvitado agregarOcupaciones"
               ></select>
               <br /><br />
               <input
@@ -434,5 +452,7 @@
     <script type="module" src="./js/2-registrarUsuario.js"></script>
     <script type="module" src="./js/9-listasCensados.js"></script>
     <script type="module" src="./js/8-eliminarDatosCenso.js"></script>
+    <!-- <script type="module" src="./js/7-modificarDatoInvitado.js"></script> -->
+    <script type="module" src="./js/11-informacionCensista.js"></script>
   </body>
 </html>

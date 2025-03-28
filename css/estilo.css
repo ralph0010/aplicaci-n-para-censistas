@@ -224,3 +224,15 @@ input[type="button"]:disabled {
 .btn:hover, .btnClic:hover {
   cursor: pointer;
 }
+
+.estadisticas{
+  background-color: #63c0b4bd;
+  padding: 1em;
+  border-color: #303036;
+  border: solid;
+  border-radius: 4px;
+}
+.estadisticas:first-of-type{
+  background-color: #efefefb9;
+  margin-bottom: 1em;
+}

@@ -10,13 +10,17 @@ export class Departamento {
     this.cantidadEstudiantes=0;
     this.cantNoTrabajan=0;
     this.cantDependientesYIndepen =0;
+    this.mayoresEdad =0;
+    this.menoresEdad =0;
   }
 
-  agregarPersonaCensada(ocupacion){
+  agregarPersonaCensada(ocupacion, edad){
     this.cantidadTotalCensados++;
     if(ocupacion ===  1 || ocupacion === 2) this.cantDependientesYIndepen++;
     else if(ocupacion === 3) this.cantidadEstudiantes++;
-    else if(ocupacion === 4) this.cantNoTrabajan++; 
+    else if(ocupacion === 4) this.cantNoTrabajan++;
+    if(edad> 17) this.mayoresEdad++;
+    else this.menoresEdad++; 
   }
 
   calcularPorcentaje(total){

@@ -3,7 +3,7 @@ import { ocupaciones } from "./Ocupacion.js";
 class Biblioteca {
   constructor() {}
   stringValidator(texto) {
-    if(texto === undefined || texto.length === 0) return false;
+    if (texto === undefined || texto.length === 0) return false;
     for (let i = 0; i < texto.length; i++) {
       //Recorrida del parametro de texto
       let letra = texto.charCodeAt(i); //Creamos una variable que le asignamos el codigo ASCII en cada letra
@@ -35,38 +35,63 @@ class Biblioteca {
       document.querySelector("#" + slc).innerHTML += `      
         <option value = "${depart.valor}">${depart.nombre}</option>`; //En la repetitiva aumentamos el select con el array de departamentos en el objeto Departamentos
     });
-    
   }
+  agregarDepartamentosPorClase(slc) {
+    //Recibe como parameto el id del slc
+    let departamentosAgregar = document.getElementsByClassName(slc);
+    for(let i=0; i<departamentosAgregar.length; i++){
+      let dep = departamentosAgregar[i];
+      dep.innerHTML = `<option value = "-1"> Seleccionar </option>`;
+      departamentos.forEach((depart) => {
+        dep.innerHTML += `      
+          <option value = "${depart.valor}">${depart.nombre}</option>`; //En la repetitiva aumentamos el select con el array de departamentos en el objeto Departamentos
+      });
+    }
+  }
+  agregarOcupacionPorClase(slc) {
+    //Recibe como parameto el id del slc
+    let OcupacionAgregar = document.getElementsByClassName(slc);
+    for(let i=0; i<OcupacionAgregar.length; i++){
+      let ocup = OcupacionAgregar[i];
+      ocup.innerHTML = `<option value = "-1"> Seleccionar </option>`;
+      ocupaciones.forEach((ocupacion) => {
+        ocup.innerHTML += `      
+          <option value = "${ocupacion.tipo}">${ocupacion.nombre}</option>`; //En la repetitiva aumentamos el select con el array de departamentos en el objeto Departamentos
+      });
+    }
+  }
+  
   agregarOcupacion(slc) {
     document.querySelector("#" + slc).innerHTML = `
     <option value = "-1">Seleccionar</option>`; //Asignamos el primer valor en el id a buscar
-    ocupaciones.forEach((ocupa)=> {
-      document.querySelector("#"+slc).innerHTML += `
-        <option value = "${ocupa.tipo}">${ocupa.nombre}</option>`;
-    })
+    ocupaciones.forEach((ocupa) => {
+      document.querySelector("#" + slc).innerHTML += `
+      <option value = "${ocupa.tipo}">${ocupa.nombre}</option>`;
+    });
   }
-  verificarEdadNoVacia(edad){
-    if(edad == "" || edad == undefined) return -1;
+  verificarEdadNoVacia(edad) {
+    if (edad == "" || edad == undefined) return -1;
     else return Number(edad);
   }
-
-  verficarCampoNoVacio(campo, nombreCampo){
-    if(campo ==null || campo == undefined || campo == "")
+  
+  verficarCampoNoVacio(campo, nombreCampo) {
+    if (campo == null || campo == undefined || campo == "")
       throw new Error(`${nombreCampo} no puede estar vacío`);
     return campo;
   }
-
 }
 export let biblioteca = new Biblioteca();
-
+//Cargo los departamentos en los slc correspondientes una sola vez
+biblioteca.agregarDepartamentosPorClase("cargarDepartamentos");
+biblioteca.agregarOcupacionPorClase("agregarOcupaciones")
 function contraseñaValida(contraseña) {
   let acceso = false; //Inicio la variable con un false para menor codigo
-
+  
   let mayuscula = 0; //Lo usaremos como contador
   let minuscula = 0; //Lo usaremos como contador
   let numero = 0; //Lo usaremos como contador
   let numeros = "0123456789"; //Lo usaremos para recorrer en una repetitiva para ver si contiene numeros
-
+  
   for (let i = 0; i < contraseña.length; i++) {
     //recorremos la variable llegada de contraseña
     for (let a = 0; a < numeros.length; a++) {
@@ -95,7 +120,6 @@ function contraseñaValida(contraseña) {
   return acceso; //Retornamos el acesso si es true o false
   //agrega datos a la slc del inner html, pasando por parametor el id
 }
-
 
 function vaciarDatos(clase) {
   let datos = document.getElementsByClassName(clase); //Se asigna un array de id, que lo consigue a traves de la clase en el HTML
