@@ -1,7 +1,17 @@
 import { departamentos } from "./Departamento.js";
 import { ocupaciones } from "./Ocupacion.js";
+let numero = "9";
+console.log("codigo numero: "+numero.charCodeAt(0));
 class Biblioteca {
   constructor() {}
+  stringANumeros(texto){
+    let retorno="";
+    for(let i=0; i<texto.length;i++){
+      letra = texto.charCodeAt(i);
+      if(letra > 47 && letra < 58) retorno+= letra;
+    }
+    return retorno;
+  }
   stringValidator(texto) {
     if (texto === undefined || texto.length === 0) return false;
     for (let i = 0; i < texto.length; i++) {
