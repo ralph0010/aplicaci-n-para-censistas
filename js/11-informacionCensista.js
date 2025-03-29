@@ -2,13 +2,13 @@ import { biblioteca } from "./biblioteca.js";
 import { sistemaCenso } from "./sistema/sistema.js";
 document.querySelector("#btnMostrarCantidadCensados").addEventListener("click", mostrarCensadosporLista);
 
+mostrarTablaDepartamento();  
 function mostrarTotalCensados(){
     let totalCensados = sistemaPersona.personas.length
     document.querySelector("#pMensajeTotalCensados").innerHTML = "El total de personas censadas hasta el momento es de: " + totalCensados;
     document.querySelector("#pMensajePendientesValidar").innerHTML = "El porcentaje de personas pendientes a validar son: " + sistemaPersona.contadorPendientesAValidar() + "%";
 }
 // mostrarTotalCensados(); //muestra el total de censados 
-// mostrarTablaDepartamento(); //muestra los departamentos en una tabla 
 
 //Muestra los censados mayores de edad y menores de edad
 function mostrarCensadosporLista(){
@@ -32,14 +32,16 @@ function mostrarCensadosporLista(){
         mensaje.innerHTML = error;
     }
 }
+//Muestra la cantidad de personas censadas por cada departamento
 function mostrarTablaDepartamento(){
-    document.querySelector("#tblMostrarDepartamento").innerHTML = "";
-    for(let i = 0; i < sistemaDepartamento.departamentos.length; i++){
-        const Objdepartamento = sistemaDepartamento.departamentos[i];
-        document.querySelector("#tblMostrarDepartamento").innerHTML += `
+
+    let datosDepartamentos =document.querySelector("#tblMostrarDepartamento");
+    datosDepartamentos.innerHTML = "";
+    sistemaCenso.departamentos.forEach((dep)=>{
+        datosDepartamentos.innerHTML+= `
         <tr>
-        <td>${Objdepartamento.nombre}</td>
-        <td>${sistemaPersona.contadorPersonasDepartamento(Objdepartamento.nombre)}</td>
+        <td>${dep.nombre}</td>
+        <td>${dep.cantidadTotalCensados}</td>
         </tr>`
-    }
+    })
 }
