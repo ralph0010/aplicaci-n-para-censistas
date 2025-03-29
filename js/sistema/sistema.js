@@ -245,7 +245,14 @@ class Sistema {
     if(sonMayores) return departamento.mayoresEdad;
     else return departamento.menoresEdad;
   }
-
+  //metodo para obtener la cantidad de personas que no se han validado el censo
+  obtenerCantCensosSinValidar(){
+    let contador =0;
+    this.personas.forEach((per)=>{
+      if(per.validado) contador++;
+    })
+    return contador;
+  }
 }
 
 export let sistemaCenso = new Sistema(); // le damos la funcionalidad al sistema

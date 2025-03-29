@@ -1,14 +1,19 @@
-import { biblioteca } from "./biblioteca.js";
 import { sistemaCenso } from "./sistema/sistema.js";
 document.querySelector("#btnMostrarCantidadCensados").addEventListener("click", mostrarCensadosporLista);
 
+mostrarTotalCensados(); //muestra el total de censados 
 mostrarTablaDepartamento();  
 function mostrarTotalCensados(){
-    let totalCensados = sistemaPersona.personas.length
-    document.querySelector("#pMensajeTotalCensados").innerHTML = "El total de personas censadas hasta el momento es de: " + totalCensados;
-    document.querySelector("#pMensajePendientesValidar").innerHTML = "El porcentaje de personas pendientes a validar son: " + sistemaPersona.contadorPendientesAValidar() + "%";
+    let tbody = document.querySelector("#tblBodyTotalCensadasYPenValidar");
+    tbody.innerHTML ="";
+    let censosPendientesValidar = sistemaCenso.obtenerCantCensosSinValidar();
+    let totalPersonas = sistemaCenso.personas.length;
+    tbody.innerHTML +=`
+    <tr>
+    <td>${totalPersonas}</td>
+    <td>${censosPendientesValidar}</td>
+    </tr>`
 }
-// mostrarTotalCensados(); //muestra el total de censados 
 
 //Muestra los censados mayores de edad y menores de edad
 function mostrarCensadosporLista(){
