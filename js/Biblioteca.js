@@ -1,14 +1,12 @@
 import { departamentos } from "./Departamento.js";
 import { ocupaciones } from "./Ocupacion.js";
-let numero = "9";
-console.log("codigo numero: "+numero.charCodeAt(0));
 class Biblioteca {
   constructor() {}
   stringANumeros(texto){
     let retorno="";
     for(let i=0; i<texto.length;i++){
-      letra = texto.charCodeAt(i);
-      if(letra > 47 && letra < 58) retorno+= letra;
+      let letra = texto.charCodeAt(i);
+      if(letra > 47 && letra < 58) retorno+= texto[i];
     }
     return retorno;
   }
@@ -29,7 +27,8 @@ class Biblioteca {
         letra !== 233 &&
         letra !== 237 &&
         letra !== 243 &&
-        letra !== 250
+        letra !== 250 &&
+        letra !== 241
       ) {
         return false;
       }

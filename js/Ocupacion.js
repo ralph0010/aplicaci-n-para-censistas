@@ -5,6 +5,9 @@ export class Ocupacion {
     this.tipo = tipo;
     this.nombre = nombre;
   }
+  obtenerId(){
+    return this.tipo;
+  }
 }
 export function retornarOcupacionPorTipo(tipoIngresado) {
   tipoEsValido(tipoIngresado);

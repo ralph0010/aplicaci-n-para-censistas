@@ -14,12 +14,13 @@ export class Persona {
     this.nombre = nombre;
     this.apellido = apellido;
     this.edad = edad;
-    this.cedula = reEscribirCedula(cedula);
+    this.cedula = cedula;
     this.departamento = departamento;
     this.ocupacion = ocupacion;
     this.validado = validado;
     this.validarPersonas(nombre, apellido, edad, cedula);
   }
+  
   validarPersonas(nombre, apellido, edad, cedula) {
     if (!biblioteca.stringValidator(nombre))
       throw new Error(
@@ -45,33 +46,25 @@ export class Persona {
   }
 
   #validarCedula(cedula) {
-    this.#validarCantidadDigitosCedulas(cedula);
+    validarCantidadDigitosCedulas(cedula);
     if (!cedulaEsValida(cedula))
-      throw new Error("La cédula ingresada no es válidad");
+      throw new Error("La cédula ingresada no es válida");
   }
-
-  #validarCantidadDigitosCedulas(cedula) {
-    if (cedula.length < 7 || cedula.length > 8)
-      throw new Error("Error, la cédula debe contener entre 7 y 8 dígitos");
-  }
-
   agregarPersonaADepartamento() {
     this.departamento.agregarPersonaCensada(this.ocupacion.tipo, this.edad);
   }
+  obtenerIdDepartamento(){
+    return this.departamento.obtenerId();
+  }
+  obtenerIdOcupacion(){
+    return this.ocupacion.obtenerId();
+  }
+}
+export function validarCantidadDigitosCedulas(cedula) {
+  if (cedula.length < 7 || cedula.length > 8)
+    throw new Error("La cédula debe contener entre 7 y 8 dígitos");
 }
 
-export function reEscribirCedula(cedula) {
-  //Nos va servir para reescribir la cedula
-  let cedulaReescrita = ""; //Variable con un valor nulo
-  for (let i = 0; i < cedula.length; i++) {
-    //Recorremos el array del parametro
-    if (cedula.charCodeAt(i) >= 48 && cedula.charCodeAt(i) <= 57) {
-      //Preguntamos si en la posicion de "i" se encuentra dentro del codigo ASCII
-      cedulaReescrita += cedula.charAt(i); // En caso afirmativo lo agregamos a la variable
-    }
-  }
-  return cedulaReescrita; //Retornamos los caracteres de los números al final
-}
 // console.log(generarIdsValidos());
 
 function generarCedulasAleatorias() {

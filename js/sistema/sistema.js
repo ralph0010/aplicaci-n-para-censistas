@@ -6,6 +6,7 @@ import {
   obtenerDepartamentoPorValor,
 } from "../Departamento.js";
 import {
+  obtenerOcupacionPorNombre,
   Ocupacion,
   ocupaciones,
   retornarOcupacionPorTipo,
@@ -14,7 +15,7 @@ import {
   Persona,
   cedulaEsValida,
   juegoPruebasPersonas,
-  reEscribirCedula,
+  validarCantidadDigitosCedulas,
 } from "../Persona.js"; //juegoPruebasPersonas
 class Sistema {
   constructor() {
@@ -93,7 +94,7 @@ class Sistema {
       nombre,
       apellido,
       edad,
-      cedula,
+      biblioteca.stringANumeros(cedula),
       departamento,
       ocupacion,
       validado
@@ -166,15 +167,10 @@ class Sistema {
   }
   //retorna el objeto persona del array por su cedula
   obtenerPersonaPorCI(cedula) {
-    let persona = this.personas.find((persona) => {
-      Number(persona.cedula) === Number(cedula);
-    });
-    return persona;
+    return this.personas.find((pers) => Number(pers.cedula) === Number(cedula));
   }
   //retorna la persona haciendo las validaciones correspondientes
-  retornarPersonaConValidacion(cedula){
-    
-  }
+  retornarPersonaConValidacion(cedula) {}
   //Modifica los datos del censo, teniendo en cuenta que es un invitado
 
   //--------------------------------------Antiguo y corregir TO DO
@@ -233,25 +229,79 @@ class Sistema {
     }
     return nombre;
   }
-  
-  obtenerPorcentajeMayorOMenorEdad(codDepartamento, sonMayores){
-    let departamento = obtenerDepartamentoPorValor(codDepartamento)
-    let cantidad = this.obtenerCantMayoresOMenoresPorDep(departamento, sonMayores);
-    let totalCensados =departamento.cantidadTotalCensados;
-    return cantidad * 100 / totalCensados;
+
+  obtenerPorcentajeMayorOMenorEdad(codDepartamento, sonMayores) {
+    let departamento = obtenerDepartamentoPorValor(codDepartamento);
+    let cantidad = this.obtenerCantMayoresOMenoresPorDep(
+      departamento,
+      sonMayores
+    );
+    let totalCensados = departamento.cantidadTotalCensados;
+    return (cantidad * 100) / totalCensados;
   }
   //metodo para obtener cantidad de mayores o menores segun departamento
-  obtenerCantMayoresOMenoresPorDep(departamento, sonMayores){
-    if(sonMayores) return departamento.mayoresEdad;
+  obtenerCantMayoresOMenoresPorDep(departamento, sonMayores) {
+    if (sonMayores) return departamento.mayoresEdad;
     else return departamento.menoresEdad;
   }
   //metodo para obtener la cantidad de personas que no se han validado el censo
-  obtenerCantCensosSinValidar(){
-    let contador =0;
-    this.personas.forEach((per)=>{
-      if(per.validado) contador++;
-    })
+  obtenerCantCensosSinValidar() {
+    let contador = 0;
+    this.personas.forEach((per) => {
+      if (per.validado) contador++;
+    });
     return contador;
+  }
+  obtenerPersonaParaModificarDatos(cedula) {
+    cedula = biblioteca.stringANumeros(cedula);
+    validarCantidadDigitosCedulas(cedula);
+    if (!cedulaEsValida(cedula))
+      throw new Error("La cédula ingresada no es válida");
+    let persona = this.obtenerPersonaPorCI(cedula);
+    if (persona == undefined)
+      throw new Error("La cédula ingresada no ha sido registrada previamente");
+    if (persona.validado)
+      throw new Error(
+        `No puede modificar los datos de ${persona.nombre} ${persona.apellido} porque ya ha sido validado por un censista`
+      );
+    return persona;
+  }
+  modificarDatos(
+    nombre,
+    apellido,
+    edad,
+    cedula,
+    codDepartamento,
+    codOcupacion,
+    validado
+  ) {
+    let departamento = obtenerDepartamentoPorValor(codDepartamento);
+    let ocupacion = retornarOcupacionPorTipo(codOcupacion);
+    let personaModificada = new Persona(
+      nombre,
+      apellido,
+      edad,
+      cedula,
+      departamento,
+      ocupacion,
+      validado
+    );
+    if(!this.buscarYmodificarPersona(personaModificada)) throw new Exception ("No se pudo realizar ");
+    
+  }
+  buscarYmodificarPersona(persona){
+    for(let i = 0; i<this.personas.length;i++){
+      let per = this.personas[i];
+      if(per.cedula == persona.cedula){
+        per.nombre= persona.nombre;
+        per.apellido= persona.apellido;
+        per.departamento= persona.departamento;
+        per.ocupacion= persona.ocupacion;
+        per.edad= persona.edad;
+        return true;
+      }
+    }
+  return false;
   }
 }
 

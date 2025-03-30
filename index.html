@@ -406,10 +406,10 @@
               <label for="edadModificado">Edad:</label><br />
               <input type="text" id="edadModificado" /> <br />
               <label for="departamentosModificado">Departamento:</label><br />
-              <select id="departamentosModificado"></select>
+              <select id="departamentosModificado" class="cargarDepartamentos"></select>
               <br />
               <label for="ocupacionModificado">Ocupacion </label><br />
-              <select id="ocupacionModificado"></select>
+              <select id="ocupacionModificado" class="agregarOcupaciones"></select>
               <br />
               <input
                 type="button"
@@ -417,6 +417,7 @@
                 value="Modificar Datos"
               />
             </div>
+            <p id="pMensajeDatosModificados"></p>
           </div>
 
           <div id="seccionListaCensados" class="seccion">
@@ -461,7 +462,7 @@
     <script type="module" src="./js/2-registrarUsuario.js"></script>
     <script type="module" src="./js/9-listasCensados.js"></script>
     <script type="module" src="./js/8-eliminarDatosCenso.js"></script>
-    <!-- <script type="module" src="./js/7-modificarDatoInvitado.js"></script> -->
+    <script type="module" src="./js/7-modificarDatoInvitado.js"></script>
     <script type="module" src="./js/11-informacionCensista.js"></script>
   </body>
 </html>

@@ -1,4 +1,3 @@
-
 const valorMinimoDepartamento = 1;
 const valorMaximoDepartamento = 19;
 
@@ -7,27 +6,28 @@ export class Departamento {
     this.nombre = nombre;
     this.valor = valor;
     this.cantidadTotalCensados = 0;
-    this.cantidadEstudiantes=0;
-    this.cantNoTrabajan=0;
-    this.cantDependientesYIndepen =0;
-    this.mayoresEdad =0;
-    this.menoresEdad =0;
+    this.cantidadEstudiantes = 0;
+    this.cantNoTrabajan = 0;
+    this.cantDependientesYIndepen = 0;
+    this.mayoresEdad = 0;
+    this.menoresEdad = 0;
   }
-
-  agregarPersonaCensada(ocupacion, edad){
+  obtenerId() {
+    return this.valor;
+  }
+  agregarPersonaCensada(ocupacion, edad) {
     this.cantidadTotalCensados++;
-    if(ocupacion ===  1 || ocupacion === 2) this.cantDependientesYIndepen++;
-    else if(ocupacion === 3) this.cantidadEstudiantes++;
-    else if(ocupacion === 4) this.cantNoTrabajan++;
-    if(edad> 17) this.mayoresEdad++;
-    else this.menoresEdad++; 
+    if (ocupacion === 1 || ocupacion === 2) this.cantDependientesYIndepen++;
+    else if (ocupacion === 3) this.cantidadEstudiantes++;
+    else if (ocupacion === 4) this.cantNoTrabajan++;
+    if (edad > 17) this.mayoresEdad++;
+    else this.menoresEdad++;
   }
 
-  calcularPorcentaje(total){
+  calcularPorcentaje(total) {
     let retorno = Math.round((this.cantidadTotalCensados * 100) / total);
     return retorno;
   }
-  
 }
 export function obtenerDepartamentoPorNombre(nombreDepartamento) {
   for (const departamento of departamentos) {
@@ -38,15 +38,13 @@ export function obtenerDepartamentoPorNombre(nombreDepartamento) {
 }
 export function obtenerDepartamentoPorValor(valorDepartamento) {
   validarDepartamento(valorDepartamento);
-  let departamentoRetorno = null; 
-  departamentoRetorno = departamentos.find(({valor}) => 
-    Number(valor) == Number(valorDepartamento)
+  
+  let departamentoRetorno = departamentos.find(
+    (dep) => Number(dep.valor) === Number(valorDepartamento)
   );
 
-  if(departamentoRetorno === null || departamentoRetorno === undefined) throw new Error("No se encontró el departamento");
-  else{
-    return departamentoRetorno;
-  }
+  if (departamentoRetorno === undefined)throw new Error("No se encontró el departamento");
+  return departamentoRetorno;
 }
 function validarDepartamento(departamento) {
   if (
@@ -57,18 +55,18 @@ function validarDepartamento(departamento) {
   }
 }
 export const departamentos = [
-  new Departamento("Artigas", 1),//0
-  new Departamento("Canelones", 2),//1
-  new Departamento("Cerro Largo", 3),//2
-  new Departamento("Colonia", 4),//3
-  new Departamento("Durazno", 5),//4
-  new Departamento("Flores", 6),//5
-  new Departamento("Florida", 7),//6
-  new Departamento("Lavalleja", 8),//7
-  new Departamento("Maldonado", 9),//8
-  new Departamento("Montevideo", 10),//9
-  new Departamento("Paysandú", 11),//10
-  new Departamento("Río Negro", 12),//11
+  new Departamento("Artigas", 1), //0
+  new Departamento("Canelones", 2), //1
+  new Departamento("Cerro Largo", 3), //2
+  new Departamento("Colonia", 4), //3
+  new Departamento("Durazno", 5), //4
+  new Departamento("Flores", 6), //5
+  new Departamento("Florida", 7), //6
+  new Departamento("Lavalleja", 8), //7
+  new Departamento("Maldonado", 9), //8
+  new Departamento("Montevideo", 10), //9
+  new Departamento("Paysandú", 11), //10
+  new Departamento("Río Negro", 12), //11
   new Departamento("Rivera", 13),
   new Departamento("Rocha", 14),
   new Departamento("Salto", 15),
