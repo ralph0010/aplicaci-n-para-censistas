@@ -46,8 +46,9 @@ export class Persona {
   }
 
   #validarCedula(cedula) {
-    validarCantidadDigitosCedulas(cedula);
-    if (!cedulaEsValida(cedula))
+    let cedulaRescrita = reEscribirCedula(cedula);
+    validarCantidadDigitosCedulas(cedulaRescrita);
+    if (!cedulaEsValida(cedulaRescrita))
       throw new Error("La cédula ingresada no es válida");
   }
   agregarPersonaADepartamento() {
@@ -64,7 +65,14 @@ export function validarCantidadDigitosCedulas(cedula) {
   if (cedula.length < 7 || cedula.length > 8)
     throw new Error("La cédula debe contener entre 7 y 8 dígitos");
 }
-
+export function reEscribirCedula(cedula){
+  let retorno = "";
+  for(let i = 0; i<cedula.length; i++){
+    let pos = cedula.charAt(i);
+    if(!isNaN(pos) && pos !== ' ') retorno+= pos;
+  }
+  return retorno;
+}
 // console.log(generarIdsValidos());
 
 function generarCedulasAleatorias() {

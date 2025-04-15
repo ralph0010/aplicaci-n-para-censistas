@@ -16,6 +16,7 @@ import {
   cedulaEsValida,
   juegoPruebasPersonas,
   validarCantidadDigitosCedulas,
+  reEscribirCedula
 } from "../Persona.js"; //juegoPruebasPersonas
 class Sistema {
   constructor() {
